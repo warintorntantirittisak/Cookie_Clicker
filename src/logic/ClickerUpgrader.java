@@ -8,10 +8,10 @@ public class ClickerUpgrader extends Upgrader{
 	public ClickerUpgrader(int level) {
 		super(level);
 		this.multiplier = this.getLevel();
-		this.setCost(this.getLevel());
+		this.setUpgradeCost(this.getLevel());
 	}
 	
-	public void setCost(int level) {
+	public void setUpgradeCost(int level) {
 		int cost = 0;
 		for (int i = 1; i <= level; ++i) {
 			int x = (level+2) * 10;
@@ -26,7 +26,7 @@ public class ClickerUpgrader extends Upgrader{
 	@Override
 	public void levelUp() {
 		this.setLevel(this.getLevel()+1);
-		this.setCost(this.getLevel());
+		this.setUpgradeCost(this.getLevel());
 	}
 
 }
