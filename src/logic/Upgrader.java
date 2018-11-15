@@ -3,6 +3,7 @@ package logic;
 public abstract class Upgrader {
 	
 	private int level;
+	// Max level of all upgraders is 10.
 	
 	public Upgrader(int level) {
 		if (level < 1 || level > 10) this.level = 1;

@@ -1,13 +1,14 @@
 package logic;
 
+// This upgrader increase the number of score that you gets when clicking the cookie.
 public class ClickerUpgrader extends Upgrader{
 	
-	private int multiplier;
+	private int scorePerClick;
 	private int upgradeCost;
 	
 	public ClickerUpgrader(int level) {
 		super(level);
-		this.multiplier = this.getLevel();
+		this.scorePerClick = this.getLevel();
 		this.setUpgradeCost(this.getLevel());
 	}
 	
@@ -20,7 +21,7 @@ public class ClickerUpgrader extends Upgrader{
 		this.upgradeCost = cost;
 	}
 	
-	public int getMultiplier() {return this.multiplier;}
+	public int getMultiplier() {return this.scorePerClick;}
 	public int getUpgradeCost() {return this.upgradeCost;}
 	
 	@Override
