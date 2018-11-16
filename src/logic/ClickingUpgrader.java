@@ -2,7 +2,7 @@ package logic;
 
 import javafx.scene.control.Button;
 
-// This class increases the number of score that you gets when clicking the cookie. Max level is 10.
+// This class increases the number of score that you gets when clicking the cookie. Max level of clicking is 10.
 public class ClickingUpgrader extends Button {
 	
 	private int level;
