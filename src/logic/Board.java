@@ -17,7 +17,7 @@ public class Board extends HBox {
 	}
 	public void setUpCookie(Cookie cookie,Console console) {
 		cookie.setOnAction(e-> {
-			console.addScore(1);
+			console.addScore(console.getUpgrade().getLevel());
 		});
 	}
 	public int getScore() {

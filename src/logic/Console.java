@@ -17,6 +17,9 @@ import javafx.scene.text.Font;
 public class Console extends VBox {
 	private int score;
 	private Label label;
+	private Label levellable;
+	private int cost;
+	private ClickingUpgrader cookieup;
 	public Console() {
 		setAlignment(Pos.CENTER);
 		setPrefWidth(250);
@@ -27,12 +30,25 @@ public class Console extends VBox {
 			setBackground(new Background(new BackgroundFill(Color.IVORY, null, null)));
 		label = new Label("Score: "+ score);
 		label.setFont(Font.font(20));
-		getChildren().addAll(label);
+		cookieup = new ClickingUpgrader(1);
+		cost =cookieup.getLevel()*10;
+		levellable = new Label("Level: "+cookieup.getLevel()+" Cost to next level: "+cost);
+		cookieup.setOnAction((e-> {
+			if(score>=cost) {
+			addScore(-cost);
+			cookieup.levelUp();
+			cost =cookieup.getLevel()*10;
+			levellable.setText("Level: "+cookieup.getLevel()+" Cost to next level: "+cost);
+			}
+		}));
+		getChildren().addAll(label,cookieup,levellable);
 		setMinSize(200,200);
 	}
 	public void addScore(int n) {
 		this.score+=n;
 		label.setText("Score: "+score);
 	}
-	
+	public ClickingUpgrader getUpgrade() {
+		return this.cookieup;
+	}
 }
