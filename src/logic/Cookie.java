@@ -19,11 +19,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class Cookie extends Hyperlink {
-	
+	public int oldx;
+	public  int oldy;
 	public Cookie() {
 		super("",new ImageView(new Image("Cookie.gif")));
 		setBorder(Border.EMPTY);
-		setMaxSize(1,1);
+		oldx=75;
+		oldy=10;
 	}
 
 }

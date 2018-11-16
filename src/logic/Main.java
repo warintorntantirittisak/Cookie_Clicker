@@ -14,14 +14,23 @@ public class Main extends Application {
 		// TODO Auto-generated method stub
 		HBox root = new HBox();
 		Console console = new Console();
-		Board board = new Board(console);
+		Board board = new Board();
+		board.addCookie(console);
+		console.getAddUpgrade().setOnAction(e-> {
+			if(console.getScore()>=console.getAddCost()) {
+			board.addCookie(console);
+			console.getAddUpgrade().levelUp();
+			console.addScore(-console.getAddCost());
+			console.setAddCost(console.getAddUpgrade().getLevel()*50);
+			console.getAddlabel().setText("Number of Cookies: "+console.getAddUpgrade().getLevel()+"\n Cost to next level: "+console.getAddCost());
+			}
+		});
 		root.getChildren().addAll(console,board);
-		Scene scene = new Scene(root, 600, 500);
+		Scene scene = new Scene(root, 1000, 500);
 		primaryStage.setTitle("Cookie Clicker");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		primaryStage.setResizable(false);
-		
 	}
 	
 	public static void main(String [] args) {
