@@ -1,4 +1,4 @@
-/*package logic;
+package logic;
 
 public class AutoClickerUpgrader extends Upgrader implements Runnable {
 	
@@ -13,4 +13,3 @@ public class AutoClickerUpgrader extends Upgrader implements Runnable {
 	}
 
 }
-*/
