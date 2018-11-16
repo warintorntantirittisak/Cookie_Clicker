@@ -30,7 +30,7 @@ public class Board extends Pane {
 	}
 	public void setUpCookie(Cookie cookie,Console console) {
 		cookie.setOnAction(e-> {
-			console.addScore(console.getUpgrade().getLevel());
+			console.addScore(console.getClickingUpgrade().getLevel());
 		});
 	}
 	public int getScore() {
