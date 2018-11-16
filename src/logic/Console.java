@@ -16,6 +16,7 @@ import javafx.scene.text.Font;
 
 public class Console extends VBox {
 	private int score;
+<<<<<<< HEAD
 	private Label label;
 	private Label levellabel;
 	private Label addlabel;
@@ -23,6 +24,13 @@ public class Console extends VBox {
 	private int addcost;
 	private ClickingUpgrader cookieup;
 	private ClickingUpgrader addcookie;
+=======
+	private Label scoreLabel;
+	private Label levelLabel;
+	private int cost;
+	private ClickingUpgrader cookieUp;
+	
+>>>>>>> 685dbb6fc59dea40e955cf6da6b5085cef2322e8
 	public Console() {
 		setAlignment(Pos.CENTER);
 		setPrefWidth(250);
@@ -31,6 +39,7 @@ public class Console extends VBox {
 		setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, 
 				CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 			setBackground(new Background(new BackgroundFill(Color.IVORY, null, null)));
+<<<<<<< HEAD
 		label = new Label("Score: "+ score);
 		label.setFont(Font.font(20));
 		cookieup = new ClickingUpgrader(1);
@@ -48,12 +57,30 @@ public class Console extends VBox {
 			}
 		}));
 		getChildren().addAll(label,levellabel,cookieup,addlabel,addcookie);
+=======
+		scoreLabel = new Label("Score: "+ score);
+		scoreLabel.setFont(Font.font(20));
+		cookieUp = new ClickingUpgrader(1);
+		cost = cookieUp.getUpgradeCost();
+		levelLabel = new Label("Level: "+cookieUp.getLevel()+" Cost to next level: "+cost);
+		cookieUp.setOnAction((e-> {
+			if(score>=cost) {
+				addScore(-cost);
+				cookieUp.levelUp();
+				cost = cookieUp.getUpgradeCost();
+				levelLabel.setText("Level: "+cookieUp.getLevel()+" Cost to next level: "+cost);
+			}
+		}));
+		getChildren().addAll(scoreLabel,cookieUp,levelLabel);
+>>>>>>> 685dbb6fc59dea40e955cf6da6b5085cef2322e8
 		setMinSize(200,200);
 	}
+	
 	public void addScore(int n) {
 		this.score+=n;
-		label.setText("Score: "+score);
+		scoreLabel.setText("Score: "+score);
 	}
+<<<<<<< HEAD
 	public int getScore() {
 		return this.score;
 	}
@@ -69,8 +96,11 @@ public class Console extends VBox {
 	public Label getAddlabel() {
 		return this.addlabel;
 	}
+=======
+	
+>>>>>>> 685dbb6fc59dea40e955cf6da6b5085cef2322e8
 	public ClickingUpgrader getUpgrade() {
-		return this.cookieup;
+		return this.cookieUp;
 	}
 	public ClickingUpgrader getAddUpgrade() {
 		return this.addcookie;
