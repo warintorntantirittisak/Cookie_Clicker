@@ -16,10 +16,11 @@ import javafx.scene.text.Font;
 
 public class Console extends VBox {
 	private int score;
-	private Label label;
-	private Label levellable;
+	private Label scoreLabel;
+	private Label levelLabel;
 	private int cost;
-	private ClickingUpgrader cookieup;
+	private ClickingUpgrader cookieUp;
+	
 	public Console() {
 		setAlignment(Pos.CENTER);
 		setPrefWidth(250);
@@ -28,27 +29,29 @@ public class Console extends VBox {
 		setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, 
 				CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 			setBackground(new Background(new BackgroundFill(Color.IVORY, null, null)));
-		label = new Label("Score: "+ score);
-		label.setFont(Font.font(20));
-		cookieup = new ClickingUpgrader(1);
-		cost =cookieup.getLevel()*10;
-		levellable = new Label("Level: "+cookieup.getLevel()+" Cost to next level: "+cost);
-		cookieup.setOnAction((e-> {
+		scoreLabel = new Label("Score: "+ score);
+		scoreLabel.setFont(Font.font(20));
+		cookieUp = new ClickingUpgrader(1);
+		cost = cookieUp.getUpgradeCost();
+		levelLabel = new Label("Level: "+cookieUp.getLevel()+" Cost to next level: "+cost);
+		cookieUp.setOnAction((e-> {
 			if(score>=cost) {
-			addScore(-cost);
-			cookieup.levelUp();
-			cost =cookieup.getLevel()*10;
-			levellable.setText("Level: "+cookieup.getLevel()+" Cost to next level: "+cost);
+				addScore(-cost);
+				cookieUp.levelUp();
+				cost = cookieUp.getUpgradeCost();
+				levelLabel.setText("Level: "+cookieUp.getLevel()+" Cost to next level: "+cost);
 			}
 		}));
-		getChildren().addAll(label,cookieup,levellable);
+		getChildren().addAll(scoreLabel,cookieUp,levelLabel);
 		setMinSize(200,200);
 	}
+	
 	public void addScore(int n) {
 		this.score+=n;
-		label.setText("Score: "+score);
+		scoreLabel.setText("Score: "+score);
 	}
+	
 	public ClickingUpgrader getUpgrade() {
-		return this.cookieup;
+		return this.cookieUp;
 	}
 }

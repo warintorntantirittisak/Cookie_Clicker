@@ -12,10 +12,13 @@ public class ClickingUpgrader extends Upgrader{
 		this.setUpgradeCost(this.getLevel());
 	}
 	
+	/* The cost for upgrade clicking to level n 
+	 * C(n) = C(n-1) + (n+2)*10    ; 1 <= n <= 10
+	 * C(0) = 0 */
 	public void setUpgradeCost(int level) {
 		int cost = 0;
 		for (int i = 1; i <= level; ++i) {
-			int x = (level+2) * 10;
+			int x = (level+2)*10;
 			cost += x;
 		}
 		this.upgradeCost = cost;
