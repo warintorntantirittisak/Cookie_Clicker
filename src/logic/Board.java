@@ -47,7 +47,7 @@ public class Board extends Pane {
     		PathTransition pathTransition = new PathTransition();
 
             pathTransition.setDuration(javafx.util.Duration.millis(600));
-            pathTransition.setPath(createPath( cookie));
+            pathTransition.setPath(createPath(cookie));
             pathTransition.setNode(cookie);
             pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
             pathTransition.setOnFinished(e -> {

@@ -16,21 +16,15 @@ import javafx.scene.text.Font;
 
 public class Console extends VBox {
 	private int score;
-<<<<<<< HEAD
-	private Label label;
+	private Label scorelabel;
 	private Label levellabel;
 	private Label addlabel;
 	private int cost;
 	private int addcost;
 	private ClickingUpgrader cookieup;
 	private ClickingUpgrader addcookie;
-=======
-	private Label scoreLabel;
-	private Label levelLabel;
-	private int cost;
-	private ClickingUpgrader cookieUp;
 	
->>>>>>> 685dbb6fc59dea40e955cf6da6b5085cef2322e8
+	
 	public Console() {
 		setAlignment(Pos.CENTER);
 		setPrefWidth(250);
@@ -38,10 +32,9 @@ public class Console extends VBox {
 		setSpacing(10);
 		setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, 
 				CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-			setBackground(new Background(new BackgroundFill(Color.IVORY, null, null)));
-<<<<<<< HEAD
-		label = new Label("Score: "+ score);
-		label.setFont(Font.font(20));
+		setBackground(new Background(new BackgroundFill(Color.IVORY, null, null)));
+		scorelabel = new Label("Score: "+ score);
+		scorelabel.setFont(Font.font(20));
 		cookieup = new ClickingUpgrader(1);
 		addcookie= new ClickingUpgrader(1) ;
 		cost =cookieup.getLevel()*20;
@@ -56,31 +49,14 @@ public class Console extends VBox {
 			levellabel.setText("Level: "+cookieup.getLevel()+" Cost to next level: "+cost);
 			}
 		}));
-		getChildren().addAll(label,levellabel,cookieup,addlabel,addcookie);
-=======
-		scoreLabel = new Label("Score: "+ score);
-		scoreLabel.setFont(Font.font(20));
-		cookieUp = new ClickingUpgrader(1);
-		cost = cookieUp.getUpgradeCost();
-		levelLabel = new Label("Level: "+cookieUp.getLevel()+" Cost to next level: "+cost);
-		cookieUp.setOnAction((e-> {
-			if(score>=cost) {
-				addScore(-cost);
-				cookieUp.levelUp();
-				cost = cookieUp.getUpgradeCost();
-				levelLabel.setText("Level: "+cookieUp.getLevel()+" Cost to next level: "+cost);
-			}
-		}));
-		getChildren().addAll(scoreLabel,cookieUp,levelLabel);
->>>>>>> 685dbb6fc59dea40e955cf6da6b5085cef2322e8
+		getChildren().addAll(scorelabel,levellabel,cookieup,addlabel,addcookie);
 		setMinSize(200,200);
 	}
 	
 	public void addScore(int n) {
 		this.score+=n;
-		scoreLabel.setText("Score: "+score);
+		scorelabel.setText("Score: "+score);
 	}
-<<<<<<< HEAD
 	public int getScore() {
 		return this.score;
 	}
@@ -96,11 +72,8 @@ public class Console extends VBox {
 	public Label getAddlabel() {
 		return this.addlabel;
 	}
-=======
-	
->>>>>>> 685dbb6fc59dea40e955cf6da6b5085cef2322e8
 	public ClickingUpgrader getUpgrade() {
-		return this.cookieUp;
+		return this.cookieup;
 	}
 	public ClickingUpgrader getAddUpgrade() {
 		return this.addcookie;
