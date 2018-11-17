@@ -1,5 +1,9 @@
 package logic;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -64,11 +68,19 @@ public class Console extends VBox {
 			if (score >= autoclickercost) {
 				addScore(-autoclickercost);
 				autoclickerup.getMoreClicker();
+				autoclickerup.setCost(autoclickerup.getCount());
 				autoclickercost = autoclickerup.getCost();
 				autoclickerlabel.setText("Number of Clickers: "+autoclickerup.getCount()+"\nCost to buy next Clickers: "+autoclickercost);
 			}
 		}));
-		
+		Timer produce = new Timer();
+		produce.scheduleAtFixedRate(new TimerTask() {
+	        public void run() {
+	        	Platform.runLater(() -> {
+	                addScore(autoclickerup.getCount());
+	            });
+	        }
+	    }, 1000, 1000);
 		getChildren().addAll(scorelabel,clickinglevellabel,cookieup,autoclickerlabel,autoclickerup,addlabel,addcookie);
 		setMinSize(200,200);
 	}

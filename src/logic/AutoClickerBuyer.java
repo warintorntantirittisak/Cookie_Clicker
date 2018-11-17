@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.Timer;
+
 import javafx.scene.control.Button;
 
 // This class gives you a cookie clicker. Max number of cookie clickers is 10.
@@ -12,6 +14,7 @@ public class AutoClickerBuyer extends Button {
 		super("Buy");
 		this.count = 0;
 		setCost(0);
+		
 	}
 	
 	public void setCost(int count) {
@@ -28,5 +31,6 @@ public class AutoClickerBuyer extends Button {
 	public void getMoreClicker() {
 		this.count = this.count + 1;
 	}
-
+	
+	
 }
