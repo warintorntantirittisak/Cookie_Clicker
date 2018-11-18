@@ -4,7 +4,7 @@ import java.util.Timer;
 
 import javafx.scene.control.Button;
 
-// This class gives you a cookie clicker. Max number of cookie clickers is 10.
+// This class gives you a cookie clicker that continuous generates 1 score. Max number of cookie clickers is 10. 
 public class AutoClickerBuyer extends Button {
 	
 	private int count;

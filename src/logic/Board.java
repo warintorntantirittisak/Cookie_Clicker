@@ -23,6 +23,7 @@ import javafx.util.Duration;
 public class Board extends Pane {
 	private int score;
 	private Cookie cookie;
+    private static String ccPath = ClassLoader.getSystemResource("se/cookie_click.mp3").toString();
 	
 	Random ran = new Random();
 	public Board() {
@@ -30,6 +31,12 @@ public class Board extends Pane {
 	}
 	public void setUpCookie(Cookie cookie,Console console) {
 		cookie.setOnAction(e-> {
+			try {
+				SoundPlayer clicking = new SoundPlayer(ccPath);
+				clicking.play();
+			} catch (Exception f) {
+	            f.printStackTrace();
+			}
 			console.addScore(console.getClickingUpgrade().getLevel());
 		});
 	}

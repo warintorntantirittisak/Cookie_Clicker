@@ -30,6 +30,7 @@ public class Console extends VBox {
 	private ClickingUpgrader cookieup;
 	private AutoClickerBuyer autoclickerup;
 	private ClickingUpgrader addcookie;
+    private static String uPath = ClassLoader.getSystemResource("se/upgrading.mp3").toString();
 	
 	public Console() {
 		setAlignment(Pos.CENTER);
@@ -57,6 +58,12 @@ public class Console extends VBox {
 		
 		cookieup.setOnAction((e-> {
 			if (score >= clickingcost) {
+				try {
+					SoundPlayer upgrading = new SoundPlayer(uPath);
+					upgrading.play();
+				} catch (Exception f) {
+		            f.printStackTrace();
+				}
 				addScore(-clickingcost);
 				cookieup.levelUp();
 				clickingcost = cookieup.getUpgradeCost();
@@ -66,6 +73,12 @@ public class Console extends VBox {
 		
 		autoclickerup.setOnAction((e -> {
 			if (score >= autoclickercost) {
+				try {
+					SoundPlayer upgrading = new SoundPlayer(uPath);
+					upgrading.play();
+				} catch (Exception f) {
+		            f.printStackTrace();
+				}
 				addScore(-autoclickercost);
 				autoclickerup.getMoreClicker();
 				autoclickerup.setCost(autoclickerup.getCount());
