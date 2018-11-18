@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.File;
 import java.util.Random;
 
 import javafx.animation.FadeTransition;
@@ -13,6 +14,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -23,7 +26,6 @@ import javafx.util.Duration;
 public class Board extends Pane {
 	private int score;
 	private Cookie cookie;
-    private static String ccPath = ClassLoader.getSystemResource("se/cookie_click.mp3").toString();
 	
 	Random ran = new Random();
 	public Board() {
@@ -32,8 +34,9 @@ public class Board extends Pane {
 	public void setUpCookie(Cookie cookie,Console console) {
 		cookie.setOnAction(e-> {
 			try {
-				SoundPlayer clicking = new SoundPlayer(ccPath);
-				clicking.play();
+				Media sound = new Media(new File("src/cookie_click.mp3").toURI().toString());
+				MediaPlayer mediaPlayer = new MediaPlayer(sound);
+				mediaPlayer.play();
 			} catch (Exception f) {
 	            f.printStackTrace();
 			}
