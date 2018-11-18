@@ -9,6 +9,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException; 
 import javax.sound.sampled.UnsupportedAudioFileException; 
 
+// This class is used for play sound effects.
 public class SoundPlayer {
 
 	private Clip clip;
