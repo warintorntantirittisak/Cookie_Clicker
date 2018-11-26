@@ -39,8 +39,8 @@ public class Console extends VBox {
 	private ClickingUpgrader cookieup;
 	private AutoClickerBuyer autoclickerup;
 	private ClickingUpgrader addcookie;
-	private static final String HIGHSCOREPATH = ClassLoader.getSystemResource("res/highscore.txt").toString();
-	private static final String UPGRADINGPATH = ClassLoader.getSystemResource("res/upgrading.mp3").toString();
+	private  String HIGHSCOREPATH = ("res/highscore.txt").toString();
+	private  String UPGRADINGPATH = ("res/upgrading.mp3").toString();
  
 	
 	public Console() throws IOException {
@@ -51,12 +51,12 @@ public class Console extends VBox {
 		setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, 
 				CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		setBackground(new Background(new BackgroundFill(Color.IVORY, null, null)));
-		
 		scorelabel = new Label("Score: "+ score);
 		scorelabel.setFont(Font.font(20));
-		
+		highscores = new ArrayList<String>();
 		try {
 			Scanner infile = new Scanner(new File(HIGHSCOREPATH));
+			
 			while (infile.hasNextLine()) {
 				String line = infile.nextLine();
 				this.highscores.add(line);

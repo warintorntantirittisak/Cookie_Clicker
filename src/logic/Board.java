@@ -26,7 +26,7 @@ import javafx.util.Duration;
 public class Board extends Pane {
 	private int score;
 	private Cookie cookie;
-	private static final String COOKIECLICKPATH = ClassLoader.getSystemResource("res/cookie_click.mp3").toString();
+	private static final String COOKIECLICKPATH = ("res/cookie_click.mp3").toString();
 	
 	Random ran = new Random();
 	public Board() {
