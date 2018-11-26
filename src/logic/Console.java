@@ -27,8 +27,9 @@ import javafx.scene.text.Font;
 
 public class Console extends VBox {
 	private int score;
-	private ArrayList<Integer> highScores;
+	private ArrayList<String> highscores;
 	private Label scorelabel;
+	private Label highscorelabel;
 	private Label clickinglevellabel;
 	private Label autoclickerlabel;
 	private Label addlabel;
@@ -40,7 +41,7 @@ public class Console extends VBox {
 	private ClickingUpgrader addcookie;
  
 	
-	public Console() throws FileNotFoundException, IOException {
+	public Console() throws IOException {
 		setAlignment(Pos.CENTER);
 		setPrefWidth(250);
 		setPadding(new Insets(15));
@@ -52,13 +53,19 @@ public class Console extends VBox {
 		scorelabel = new Label("Score: "+ score);
 		scorelabel.setFont(Font.font(20));
 		
-		Scanner infile = new Scanner(new File("src/highscore.txt"));
-		while (infile.hasNextLine()) {
-			int line = Integer.parseInt(infile.nextLine());
-			this.highScores.add(line);
+		try {
+			Scanner infile = new Scanner(new File("src/highscore.txt"));
+			while (infile.hasNextLine()) {
+				String line = infile.nextLine();
+				this.highscores.add(line);
+			}
+			infile.close();
+		} catch (FileNotFoundException f) {
+			System.out.println(f.getMessage());
 		}
-		infile.close();
 		
+		highscorelabel = new Label("Highscore Ranking" + "\n#1" + highscores.get(0) + "\n#2" + highscores.get(1) + "\n#3" + highscores.get(2));
+
 		cookieup = new ClickingUpgrader();
 		autoclickerup = new AutoClickerBuyer();
 		addcookie= new ClickingUpgrader();
@@ -111,7 +118,7 @@ public class Console extends VBox {
 	            });
 	        }
 	    }, 1000, 1000);
-		getChildren().addAll(scorelabel,clickinglevellabel,cookieup,autoclickerlabel,autoclickerup,addlabel,addcookie);
+		getChildren().addAll(scorelabel,highscorelabel,clickinglevellabel,cookieup,autoclickerlabel,autoclickerup,addlabel,addcookie);
 		setMinSize(200,200);
 	}
 	
