@@ -26,6 +26,7 @@ import javafx.util.Duration;
 public class Board extends Pane {
 	private int score;
 	private Cookie cookie;
+	private static final String COOKIECLICKPATH = ClassLoader.getSystemResource("res/cookie_click.mp3").toString();
 	
 	Random ran = new Random();
 	public Board() {
@@ -35,7 +36,7 @@ public class Board extends Pane {
 	public void setUpCookie(Cookie cookie,Console console) {
 		cookie.setOnAction(e-> {
 			try {
-				Media sound = new Media(new File("src/cookie_click.mp3").toURI().toString());
+				Media sound = new Media(new File(COOKIECLICKPATH).toURI().toString());
 				MediaPlayer mediaPlayer = new MediaPlayer(sound);
 				mediaPlayer.play();
 			} catch (Exception f) {

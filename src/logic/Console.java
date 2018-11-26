@@ -39,6 +39,8 @@ public class Console extends VBox {
 	private ClickingUpgrader cookieup;
 	private AutoClickerBuyer autoclickerup;
 	private ClickingUpgrader addcookie;
+	private static final String HIGHSCOREPATH = ClassLoader.getSystemResource("res/highscore.txt").toString();
+	private static final String UPGRADINGPATH = ClassLoader.getSystemResource("res/upgrading.mp3").toString();
  
 	
 	public Console() throws IOException {
@@ -54,7 +56,7 @@ public class Console extends VBox {
 		scorelabel.setFont(Font.font(20));
 		
 		try {
-			Scanner infile = new Scanner(new File("src/highscore.txt"));
+			Scanner infile = new Scanner(new File(HIGHSCOREPATH));
 			while (infile.hasNextLine()) {
 				String line = infile.nextLine();
 				this.highscores.add(line);
@@ -81,7 +83,7 @@ public class Console extends VBox {
 		cookieup.setOnAction((e-> {
 			if (score >= clickingcost) {
 				try {
-					Media sound = new Media(new File("src/upgrading.mp3").toURI().toString());
+					Media sound = new Media(new File(UPGRADINGPATH).toURI().toString());
 					MediaPlayer mediaPlayer = new MediaPlayer(sound);
 					mediaPlayer.play();
 				} catch (Exception f) {
@@ -97,7 +99,7 @@ public class Console extends VBox {
 		autoclickerup.setOnAction((e -> {
 			if (score >= autoclickercost) {
 				try {
-					Media sound = new Media(new File("src/upgrading.mp3").toURI().toString());
+					Media sound = new Media(new File(UPGRADINGPATH).toURI().toString());
 					MediaPlayer mediaPlayer = new MediaPlayer(sound);
 					mediaPlayer.play();
 				} catch (Exception f) {
