@@ -66,7 +66,7 @@ public class Console extends VBox {
 			System.out.println(f.getMessage());
 		}
 		
-		highscorelabel = new Label("Highscore Ranking" + "\n#1" + highscores.get(0) + "\n#2" + highscores.get(1) + "\n#3" + highscores.get(2));
+		highscorelabel = new Label("Highscore Ranking" + "\n#1 " + highscores.get(0) + "\n#2 " + highscores.get(1) + "\n#3 " + highscores.get(2));
 
 		cookieup = new ClickingUpgrader();
 		autoclickerup = new AutoClickerBuyer();
