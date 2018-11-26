@@ -31,6 +31,7 @@ public class Board extends Pane {
 	public Board() {
 		setPadding(new Insets(15));
 	}
+	
 	public void setUpCookie(Cookie cookie,Console console) {
 		cookie.setOnAction(e-> {
 			try {
@@ -43,33 +44,32 @@ public class Board extends Pane {
 			console.addScore(console.getClickingUpgrade().getLevel());
 		});
 	}
+	
 	public int getScore() {
 		return this.score;
 	}
+	
 	public void addCookie(Console console) {
 		Cookie cookie = new Cookie();
 		setPath(cookie);
 		setUpCookie(cookie,console);
 		getChildren().addAll(cookie);
-
-    };
+    }
+    
     public void setPath(Cookie cookie) {
     		PathTransition pathTransition = new PathTransition();
-
             pathTransition.setDuration(javafx.util.Duration.millis(600));
             pathTransition.setPath(createPath(cookie));
             pathTransition.setNode(cookie);
             pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
             pathTransition.setOnFinished(e -> {
-
                 pathTransition.setPath(createPath(cookie));
                 pathTransition.play();
-
             });
             pathTransition.play();
     }
+    
     private Path createPath(Cookie cookie) {
-
         int x = ran.nextInt(700-75  + 1)+75; // min=300 , max=600
         int y = ran.nextInt(450-75  + 1)+75;
         Path path = new Path();
@@ -78,6 +78,16 @@ public class Board extends Pane {
         cookie.oldy=y;
         path.getElements().add(new LineTo(x, y));
         return path;
-
+    }
+   
+    // Plays background music (Still not add music)
+    public void startBgmLoop() {
+    	try {
+			Media sound = new Media(new File("bgmpath").toURI().toString());
+			MediaPlayer mediaPlayer = new MediaPlayer(sound);
+			mediaPlayer.play();
+		} catch (Exception f) {
+            f.printStackTrace();
+		}
     }
 }

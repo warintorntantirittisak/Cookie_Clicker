@@ -1,6 +1,10 @@
 package logic;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,6 +27,7 @@ import javafx.scene.text.Font;
 
 public class Console extends VBox {
 	private int score;
+	private ArrayList<Integer> highScores;
 	private Label scorelabel;
 	private Label clickinglevellabel;
 	private Label autoclickerlabel;
@@ -35,7 +40,7 @@ public class Console extends VBox {
 	private ClickingUpgrader addcookie;
  
 	
-	public Console() {
+	public Console() throws FileNotFoundException, IOException {
 		setAlignment(Pos.CENTER);
 		setPrefWidth(250);
 		setPadding(new Insets(15));
@@ -46,6 +51,13 @@ public class Console extends VBox {
 		
 		scorelabel = new Label("Score: "+ score);
 		scorelabel.setFont(Font.font(20));
+		
+		Scanner infile = new Scanner(new File("src/highscore.txt"));
+		while (infile.hasNextLine()) {
+			int line = Integer.parseInt(infile.nextLine());
+			this.highScores.add(line);
+		}
+		infile.close();
 		
 		cookieup = new ClickingUpgrader();
 		autoclickerup = new AutoClickerBuyer();
