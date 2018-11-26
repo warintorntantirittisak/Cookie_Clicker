@@ -11,7 +11,9 @@ import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -41,6 +43,7 @@ public class Console extends VBox {
 	private ClickingUpgrader addcookie;
 	private  String HIGHSCOREPATH = ("res/highscore.txt").toString();
 	private  String UPGRADINGPATH = ("res/upgrading.mp3").toString();
+	private int interval = 60;
  
 	
 	public Console() throws IOException {
@@ -120,7 +123,27 @@ public class Console extends VBox {
 	            });
 	        }
 	    }, 1000, 1000);
-		getChildren().addAll(scorelabel,highscorelabel,clickinglevellabel,cookieup,autoclickerlabel,autoclickerup,addlabel,addcookie);
+		Timer timer = new Timer();
+		Label timeElapsed = new Label();
+		interval = 10;
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Time Out");
+		alert.setHeaderText("Time Out");
+		timer.scheduleAtFixedRate(new TimerTask() {
+	        public void run() {
+	            if(interval > 0)
+	            {
+	                Platform.runLater(() -> timeElapsed.setText("Time Left: "+interval));
+	                interval--;
+	            }
+	            else {             
+	          	Platform.runLater(() ->alert.setContentText("Your Score : "+score));	
+	            Platform.runLater(() -> alert.showAndWait());
+	            timer.cancel();
+	        }
+	        }
+	    }, 1000,1000);
+		getChildren().addAll(scorelabel,highscorelabel,clickinglevellabel,cookieup,autoclickerlabel,autoclickerup,addlabel,addcookie,timeElapsed);
 		setMinSize(200,200);
 	}
 	
