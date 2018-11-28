@@ -47,7 +47,7 @@ public class Board extends Pane {
     
     public void setPath(Cookie cookie) {
     		PathTransition pathTransition = new PathTransition();
-            pathTransition.setDuration(javafx.util.Duration.millis(600));
+            pathTransition.setDuration(javafx.util.Duration.millis(900));
             pathTransition.setPath(createPath(cookie));
             pathTransition.setNode(cookie);
             pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
@@ -59,8 +59,8 @@ public class Board extends Pane {
     }
     
     private Path createPath(Cookie cookie) {
-        int x = ran.nextInt(700-75  + 1)+75; // min=300 , max=600
-        int y = ran.nextInt(450-75  + 1)+75;
+        int x = ran.nextInt(950-75  + 1)+75; // min=300 , max=600
+        int y = ran.nextInt(700-75  + 1)+75;
         Path path = new Path();
         path.getElements().add(new MoveTo(cookie.oldx, cookie.oldy));
         cookie.oldx=x;

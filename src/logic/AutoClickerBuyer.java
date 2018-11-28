@@ -19,7 +19,7 @@ public class AutoClickerBuyer extends Button {
 		int cost = 30;
 		if (count > 10) count = 1;
 		for (int i = 1; i <= count; ++i) {
-			cost += 20;
+			cost += 10;
 		}
 		this.cost = cost;
 	}

@@ -48,7 +48,7 @@ public class Main extends Application {
 		BackgroundImage menubackgroundImage = new BackgroundImage(menuimage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
 		Background menubackground = new Background(menubackgroundImage);
 		menu.setBackground(menubackground);
-		Scene firstscene = new Scene(menu, 1000, 500);
+		Scene firstscene = new Scene(menu, 1200,700);
 		primaryStage.setTitle("Cookie Clicker");
 		primaryStage.setScene(firstscene);
 		HBox root = new HBox();
@@ -75,10 +75,10 @@ public class Main extends Application {
 		Label timeElapsed = new Label();
 		timeElapsed.setTextFill(Color.WHITE);
 		console.getChildren().add(timeElapsed);
-		Scene scene = new Scene(root, 1000, 500);
+		Scene scene = new Scene(root, 1200,700);
 		start.setOnAction(e->{
 			primaryStage.setScene(scene);
-			interval =100;
+			interval =300;
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Time Out");
 			alert.setHeaderText("Time Out");

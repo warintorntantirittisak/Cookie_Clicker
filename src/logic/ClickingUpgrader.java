@@ -18,7 +18,7 @@ public class ClickingUpgrader extends Button {
 		int cost = 20;
 		if (level > 10) level = 1;
 		for (int i = 2; i <= level; ++i) {
-			int x = (level+1)*10;
+			int x = (level+1)*5;
 			cost += x;
 		}
 		this.upgradeCost = cost;
