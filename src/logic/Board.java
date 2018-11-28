@@ -91,4 +91,7 @@ public class Board extends Pane {
             f.printStackTrace();
 		}
     }
+    public void reset() {
+    	getChildren().clear();
+    }
 }

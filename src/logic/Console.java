@@ -43,7 +43,7 @@ public class Console extends VBox {
 	private ClickingUpgrader addcookie;
 	private  String HIGHSCOREPATH = ("res/highscore.txt").toString();
 	private  String UPGRADINGPATH = ("res/upgrading.mp3").toString();
-	private int interval = 60;
+	
  
 	
 	public Console() throws IOException {
@@ -123,27 +123,8 @@ public class Console extends VBox {
 	            });
 	        }
 	    }, 1000, 1000);
-		Timer timer = new Timer();
-		Label timeElapsed = new Label();
-		interval = 10;
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Time Out");
-		alert.setHeaderText("Time Out");
-		timer.scheduleAtFixedRate(new TimerTask() {
-	        public void run() {
-	            if(interval > 0)
-	            {
-	                Platform.runLater(() -> timeElapsed.setText("Time Left: "+interval));
-	                interval--;
-	            }
-	            else {             
-	          	Platform.runLater(() ->alert.setContentText("Your Score : "+score));	
-	            Platform.runLater(() -> alert.showAndWait());
-	            timer.cancel();
-	        }
-	        }
-	    }, 1000,1000);
-		getChildren().addAll(scorelabel,highscorelabel,clickinglevellabel,cookieup,autoclickerlabel,autoclickerup,addlabel,addcookie,timeElapsed);
+	
+		getChildren().addAll(scorelabel,highscorelabel,clickinglevellabel,cookieup,autoclickerlabel,autoclickerup,addlabel,addcookie);
 		setMinSize(200,200);
 	}
 	
@@ -186,5 +167,17 @@ public class Console extends VBox {
 	}
 	public void setAddCost(int cost) {
 		this.addcost=cost;
+	}
+	public void reset() {
+		score=0;
+		cookieup = new ClickingUpgrader();
+		autoclickerup = new AutoClickerBuyer();
+		addcookie= new ClickingUpgrader();
+		clickingcost = cookieup.getUpgradeCost();
+		autoclickercost = autoclickerup.getCost();
+		addcost = addcookie.getUpgradeCost();
+		clickinglevellabel.setText("Clicking Level: "+cookieup.getLevel()+"\nCost to next level: "+clickingcost);
+		autoclickerlabel.setText("Number of Clickers: "+autoclickerup.getCount()+"\nCost to buy next Clickers: "+autoclickercost);
+		addlabel.setText("Number of Cookies: "+addcookie.getLevel()+"\nCost to add more: "+addcost);
 	}
 }
