@@ -10,17 +10,20 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
-
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -34,9 +37,17 @@ public class Main extends Application {
 		menu.setSpacing(10);
 		Label title = new Label("Cookie Clicker");
 		title.setFont(new Font("Ravie", 100));
-		Button start = new Button("Start");
+		title.setTextFill(Color.WHITE);
+		title.setUnderline(true);
+		Hyperlink start = new Hyperlink("",new ImageView(new Image("start.png")));
+		start.setBorder(Border.EMPTY);
 		menu.getChildren().addAll(title,start);
 		menu.setAlignment(Pos.CENTER);
+		Image menuimage = new Image("bg.jpeg");
+		BackgroundSize backgroundSize = new BackgroundSize(1000, 500, true, true, true, false);
+		BackgroundImage menubackgroundImage = new BackgroundImage(menuimage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+		Background menubackground = new Background(menubackgroundImage);
+		menu.setBackground(menubackground);
 		Scene firstscene = new Scene(menu, 1000, 500);
 		primaryStage.setTitle("Cookie Clicker");
 		primaryStage.setScene(firstscene);
@@ -55,7 +66,6 @@ public class Main extends Application {
 		});
 		Image image = new Image("bg.jpeg");
 		// new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage, contain, cover)
-		BackgroundSize backgroundSize = new BackgroundSize(1000, 500, true, true, true, false);
 		// new BackgroundImage(image, repeatX, repeatY, position, size)
 		BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
 		// new Background(images...)
@@ -63,6 +73,7 @@ public class Main extends Application {
 		root.setBackground(background);
 		root.getChildren().addAll(console,board);
 		Label timeElapsed = new Label();
+		timeElapsed.setTextFill(Color.WHITE);
 		console.getChildren().add(timeElapsed);
 		Scene scene = new Scene(root, 1000, 500);
 		start.setOnAction(e->{

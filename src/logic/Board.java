@@ -2,30 +2,18 @@ package logic;
 
 import java.io.File;
 import java.util.Random;
-
-import javafx.animation.FadeTransition;
 import javafx.animation.PathTransition;
-import javafx.animation.PauseTransition;
-import javafx.animation.SequentialTransition;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
-import javafx.concurrent.Task;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
-import javafx.util.Duration;
 
 
 public class Board extends Pane {
 	private int score;
-	private Cookie cookie;
 	private static final String COOKIECLICKPATH = ("res/cookie_click.mp3").toString();
 	
 	Random ran = new Random();

@@ -14,8 +14,13 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -53,9 +58,14 @@ public class Console extends VBox {
 		setSpacing(10);
 		setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, 
 				CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		setBackground(new Background(new BackgroundFill(Color.IVORY, null, null)));
+		Image consoleimage = new Image("consolebg.jpg");
+		BackgroundSize backgroundSize = new BackgroundSize(1000, 500, true, true, true, false);
+		BackgroundImage consolebackgroundImage = new BackgroundImage(consoleimage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+		Background consolebackground = new Background(consolebackgroundImage);
+		setBackground(consolebackground);
 		scorelabel = new Label("Score: "+ score);
 		scorelabel.setFont(Font.font(20));
+		scorelabel.setTextFill(Color.WHITE);
 		highscores = new ArrayList<String>();
 		try {
 			Scanner infile = new Scanner(new File(HIGHSCOREPATH));
@@ -70,7 +80,7 @@ public class Console extends VBox {
 		}
 		
 		highscorelabel = new Label("Highscore Ranking" + "\n#1 " + highscores.get(0) + "\n#2 " + highscores.get(1) + "\n#3 " + highscores.get(2));
-
+		highscorelabel.setTextFill(Color.WHITE);
 		cookieup = new ClickingUpgrader();
 		autoclickerup = new AutoClickerBuyer();
 		addcookie= new ClickingUpgrader();
@@ -80,9 +90,11 @@ public class Console extends VBox {
 		addcost = addcookie.getUpgradeCost();
 		
 		clickinglevellabel = new Label("Clicking Level: "+cookieup.getLevel()+"\nCost to next level: "+clickingcost);
-		autoclickerlabel = new Label("Number of Clickers: "+autoclickerup.getCount()+"\nCost to buy next Clickers: "+autoclickercost);
+		autoclickerlabel = new Label("Number of Auto-Clickers: "+autoclickerup.getCount()+"\nCost to buy next Auto-Clickers: "+autoclickercost);
 		addlabel = new Label("Number of Cookies: "+addcookie.getLevel()+"\nCost to add more: "+addcost);
-		
+		clickinglevellabel.setTextFill(Color.WHITE);
+		autoclickerlabel.setTextFill(Color.WHITE);
+		addlabel.setTextFill(Color.WHITE);
 		cookieup.setOnAction((e-> {
 			if (score >= clickingcost) {
 				try {
@@ -112,7 +124,7 @@ public class Console extends VBox {
 				autoclickerup.getMoreClicker();
 				autoclickerup.setCost(autoclickerup.getCount());
 				autoclickercost = autoclickerup.getCost();
-				autoclickerlabel.setText("Number of Clickers: "+autoclickerup.getCount()+"\nCost to buy next Clickers: "+autoclickercost);
+				autoclickerlabel.setText("Number of Auto-Clickers: "+autoclickerup.getCount()+"\nCost to buy next Auto-Clickers: "+autoclickercost);
 			}
 		}));
 		Timer produce = new Timer();
@@ -177,7 +189,7 @@ public class Console extends VBox {
 		autoclickercost = autoclickerup.getCost();
 		addcost = addcookie.getUpgradeCost();
 		clickinglevellabel.setText("Clicking Level: "+cookieup.getLevel()+"\nCost to next level: "+clickingcost);
-		autoclickerlabel.setText("Number of Clickers: "+autoclickerup.getCount()+"\nCost to buy next Clickers: "+autoclickercost);
+		autoclickerlabel.setText("Number of Auto-Clickers: "+autoclickerup.getCount()+"\nCost to buy next Auto-Clickers: "+autoclickercost);
 		addlabel.setText("Number of Cookies: "+addcookie.getLevel()+"\nCost to add more: "+addcost);
 	}
 }

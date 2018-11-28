@@ -1,7 +1,5 @@
 package logic;
 
-import java.util.Timer;
-
 import javafx.scene.control.Button;
 
 // This class gives you a cookie clicker that continuous generates 1 score. Max number of cookie clickers is 10. 
