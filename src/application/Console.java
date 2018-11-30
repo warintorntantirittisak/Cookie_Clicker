@@ -33,7 +33,8 @@ public class Console extends VBox {
 	private int score;
 	private ArrayList<String> highscores;
 	private Label scorelabel;
-	private Label highscorelabel;
+	private Label highscoreheaderlabel;
+	private Label highscorelistlabel;
 	private Label clickinglevellabel;
 	private Label autoclickerlabel;
 	private Label addlabel;
@@ -77,8 +78,12 @@ public class Console extends VBox {
 		} catch (FileNotFoundException f) {
 			System.out.println(f.getMessage());
 		}
-		highscorelabel = new Label("Highscore Ranking" + "\n#1 " + highscores.get(0) + "\n#2 " + highscores.get(1) + "\n#3 " + highscores.get(2));
-		highscorelabel.setTextFill(Color.WHITE);
+		highscoreheaderlabel = new Label("Highscore Ranking");
+		highscoreheaderlabel.setFont(Font.font(20));
+		highscoreheaderlabel.setTextFill(Color.WHITE);
+		
+		highscorelistlabel = new Label("#1: " + highscores.get(0) + "\n#2 :" + highscores.get(1) + "\n#3 :" + highscores.get(2));
+		highscorelistlabel.setTextFill(Color.WHITE);
 		
 		cookieup = new ClickingUpgrader();
 		autoclickerup = new AutoClickerBuyer();
@@ -127,7 +132,7 @@ public class Console extends VBox {
 	        }
 	    }, 1000, 1000);
 	
-		getChildren().addAll(scorelabel,highscorelabel,clickinglevellabel,cookieup,autoclickerlabel,autoclickerup,addlabel,addcookie);
+		getChildren().addAll(scorelabel,highscoreheaderlabel,highscorelistlabel,clickinglevellabel,cookieup,autoclickerlabel,autoclickerup,addlabel,addcookie);
 		setMinSize(200,200);
 	}
 	

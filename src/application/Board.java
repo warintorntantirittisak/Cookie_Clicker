@@ -12,7 +12,6 @@ import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import logic.Cookie;
 
-
 public class Board extends Pane {
 	
 	Random ran = new Random();
