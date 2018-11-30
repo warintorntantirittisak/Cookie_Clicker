@@ -95,12 +95,8 @@ public class Console extends VBox {
 		
 		cookieup.setOnAction((e-> {
 			if (score >= clickingcost) {
-				try {
-					AudioClip sound = new AudioClip(UPGRADINGPATH);
-					sound.play();
-				} catch (Exception f) {
-		            f.printStackTrace();
-				}
+				AudioClip sound = new AudioClip(UPGRADINGPATH);
+				sound.play();
 				addScore(-clickingcost);
 				cookieup.levelUp();
 				clickingcost = cookieup.getUpgradeCost();
@@ -110,12 +106,8 @@ public class Console extends VBox {
 		
 		autoclickerup.setOnAction((e -> {
 			if (score >= autoclickercost) {
-				try {
-					AudioClip sound = new AudioClip(UPGRADINGPATH);
-					sound.play();
-				} catch (Exception f) {
-		            f.printStackTrace();
-				}
+				AudioClip sound = new AudioClip(UPGRADINGPATH);
+				sound.play();
 				addScore(-autoclickercost);
 				autoclickerup.getMoreClicker();
 				autoclickerup.setCost(autoclickerup.getCount());
