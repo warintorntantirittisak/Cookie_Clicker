@@ -19,9 +19,9 @@ public class Cookie extends ImageView {
 	public int oldx;
 	public  int oldy;
 	Random ran = new Random();
-	private static final String COOKIECLICKPATH = ("res/cookie_click.mp3").toString();
+	private static final String COOKIECLICKPATH = "res/cookie_click.mp3";
 	public Cookie() {
-		super(new Image("Cookie.gif"));
+		super(new Image(ClassLoader.getSystemResource("Cookie.gif").toString()));
 		oldx=75;
 		oldy=10;
 	}
