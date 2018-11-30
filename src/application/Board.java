@@ -1,7 +1,8 @@
-package logic;
+package application;
 
 import java.io.File;
 import java.util.Random;
+
 import javafx.animation.PathTransition;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Pane;
@@ -10,6 +11,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
+import logic.Cookie;
 
 
 public class Board extends Pane {

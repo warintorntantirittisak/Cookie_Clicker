@@ -1,4 +1,4 @@
-package logic;
+package application;
 
 import java.io.IOException;
 
@@ -35,9 +35,12 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		WelcomePage menu = new WelcomePage();
 		Scene firstscene = new Scene(menu, 1200,700);
+		
 		primaryStage.setTitle("Cookie Clicker");
 		primaryStage.setScene(firstscene);
+		
 		HBox root = new HBox();
+		
 		console = new Console();
 		board = new Board();
 		board.addCookie(console);
@@ -50,6 +53,7 @@ public class Main extends Application {
 			console.getAddlabel().setText("Number of Cookies: "+console.getAddUpgrade().getLevel()+"\n Cost to next level: "+console.getAddCost());
 			}
 		});
+		
 		Image image = new Image("bg.jpeg");
 		// new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage, contain, cover)
 		// new BackgroundImage(image, repeatX, repeatY, position, size)
@@ -57,12 +61,17 @@ public class Main extends Application {
 		BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
 		// new Background(images...)
 		Background background = new Background(backgroundImage);
+		
 		root.setBackground(background);
 		root.getChildren().addAll(console,board);
+		
 		Label timeElapsed = new Label();
 		timeElapsed.setTextFill(Color.WHITE);
+		
 		console.getChildren().add(timeElapsed);
+		
 		Scene scene = new Scene(root, 1200,700);
+		
 		menu.getStartButton().setOnAction(e->{
 			primaryStage.setScene(scene);
 			interval =300;

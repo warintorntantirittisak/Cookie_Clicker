@@ -4,6 +4,7 @@ package logic;
 import java.io.File;
 import java.util.Random;
 
+import application.Console;
 import javafx.animation.PathTransition;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;

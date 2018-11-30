@@ -1,4 +1,4 @@
-package logic;
+package application;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,6 +27,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import logic.AutoClickerBuyer;
+import logic.ClickingUpgrader;
 
 public class Console extends VBox {
 	private int score;
