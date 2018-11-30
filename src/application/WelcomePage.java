@@ -17,6 +17,7 @@ import javafx.scene.text.Font;
 
 public class WelcomePage extends VBox{
 	private Hyperlink start;
+	
 	public WelcomePage() {
 		setSpacing(10);
 		setAlignment(Pos.CENTER);
@@ -38,6 +39,7 @@ public class WelcomePage extends VBox{
 		Background menubackground = new Background(menubackgroundImage);
 		setBackground(menubackground);
 	}
+	
 	public Hyperlink getStartButton() {
 		return this.start;
 	}

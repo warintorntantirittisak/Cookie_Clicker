@@ -1,11 +1,8 @@
 package application;
 
 import java.io.IOException;
-
-
 import javafx.application.Application;
 import javafx.application.Platform;
-
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -79,16 +76,16 @@ public class Main extends Application {
 			alert.setTitle("Time Out");
 			alert.setHeaderText("Time Out");
 			Thread timer = new Thread(() -> {
-				while(interval>0){
-				try {
-				Thread.sleep(1000);
-				Platform.runLater(()->timeElapsed.setText("Time Left: "+interval));
-	            interval--;
-				} catch (InterruptedException x) {
-				x.printStackTrace();
-				System.out.println("Stop Timer Thread");
-				break;
-				}
+				while (interval>0) {
+					try {
+						Thread.sleep(1000);
+						Platform.runLater(()->timeElapsed.setText("Time Left: "+interval));
+						interval--;
+					} catch (InterruptedException x) {
+						x.printStackTrace();
+						System.out.println("Stop Timer Thread");
+						break;
+					}
 				}
 				Platform.runLater(() -> {
 					alert.setContentText("Your Score : "+console.getScore());	
@@ -97,9 +94,8 @@ public class Main extends Application {
 		            console.reset();
 					board.reset();
 					board.addCookie(console);
-				    }
-				);
-				});
+				   });
+			});
 			timer.start();
 		});
 		primaryStage.show();

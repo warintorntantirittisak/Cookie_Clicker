@@ -43,8 +43,8 @@ public class Console extends VBox {
 	private ClickingUpgrader cookieup;
 	private AutoClickerBuyer autoclickerup;
 	private ClickingUpgrader addcookie;
-	private static final String HIGHSCOREPATH = ("res/highscore.txt").toString();
-	private static final String UPGRADINGPATH = ("res/upgrading.mp3").toString();
+	private static String highscorePath;
+	private static String upgradingPath;
 	
 	public Console() throws IOException {
 		setAlignment(Pos.CENTER);
@@ -60,13 +60,15 @@ public class Console extends VBox {
 		Background consolebackground = new Background(consolebackgroundImage);
 		setBackground(consolebackground);
 		
+		loadPath();
+		
 		scorelabel = new Label("Score: "+ score);
 		scorelabel.setFont(Font.font(20));
 		scorelabel.setTextFill(Color.WHITE);
 		
 		highscores = new ArrayList<String>();
 		try {
-			Scanner infile = new Scanner(new File(HIGHSCOREPATH));
+			Scanner infile = new Scanner(new File(highscorePath));
 			while (infile.hasNextLine()) {
 				String line = infile.nextLine();
 				this.highscores.add(line);
@@ -95,7 +97,7 @@ public class Console extends VBox {
 		
 		cookieup.setOnAction((e-> {
 			if (score >= clickingcost) {
-				AudioClip sound = new AudioClip(UPGRADINGPATH);
+				AudioClip sound = new AudioClip(upgradingPath);
 				sound.play();
 				addScore(-clickingcost);
 				cookieup.levelUp();
@@ -106,7 +108,7 @@ public class Console extends VBox {
 		
 		autoclickerup.setOnAction((e -> {
 			if (score >= autoclickercost) {
-				AudioClip sound = new AudioClip(UPGRADINGPATH);
+				AudioClip sound = new AudioClip(upgradingPath);
 				sound.play();
 				addScore(-autoclickercost);
 				autoclickerup.getMoreClicker();
@@ -180,5 +182,9 @@ public class Console extends VBox {
 		clickinglevellabel.setText("Clicking Level: "+cookieup.getLevel()+"\nCost to next level: "+clickingcost);
 		autoclickerlabel.setText("Number of Auto-Clickers: "+autoclickerup.getCount()+"\nCost to buy next Auto-Clickers: "+autoclickercost);
 		addlabel.setText("Number of Cookies: "+addcookie.getLevel()+"\nCost to add more: "+addcost);
+	}
+	public static void loadPath() {
+		highscorePath = ClassLoader.getSystemResource("res/highscore.txt").toString();
+		upgradingPath = ClassLoader.getSystemResource("res/upgrading.mp3").toString();
 	}
 }

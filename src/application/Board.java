@@ -28,12 +28,8 @@ public class Board extends Pane {
     
     // Plays background music (Still not add music)
     public void startBgmLoop() {
-    	try {
-			AudioClip bgm = new AudioClip("bgmpath");
-			bgm.play();
-		} catch (Exception f) {
-            f.printStackTrace();
-		}
+		AudioClip bgm = new AudioClip("bgmpath");
+		bgm.play();
     }
     public void reset() {
     	getChildren().clear();
