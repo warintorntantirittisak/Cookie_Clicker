@@ -23,8 +23,7 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import logic.AutoClickerBuyer;
@@ -44,10 +43,8 @@ public class Console extends VBox {
 	private ClickingUpgrader cookieup;
 	private AutoClickerBuyer autoclickerup;
 	private ClickingUpgrader addcookie;
-	private  String HIGHSCOREPATH = ("res/highscore.txt").toString();
-	private  String UPGRADINGPATH = ("res/upgrading.mp3").toString();
-	
- 
+	private static final String HIGHSCOREPATH = ("res/highscore.txt").toString();
+	private static final String UPGRADINGPATH = ("res/upgrading.mp3").toString();
 	
 	public Console() throws IOException {
 		setAlignment(Pos.CENTER);
@@ -56,18 +53,20 @@ public class Console extends VBox {
 		setSpacing(10);
 		setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, 
 				CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		
 		Image consoleimage = new Image("consolebg.jpg");
 		BackgroundSize backgroundSize = new BackgroundSize(1000, 500, true, true, true, false);
 		BackgroundImage consolebackgroundImage = new BackgroundImage(consoleimage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
 		Background consolebackground = new Background(consolebackgroundImage);
 		setBackground(consolebackground);
+		
 		scorelabel = new Label("Score: "+ score);
 		scorelabel.setFont(Font.font(20));
 		scorelabel.setTextFill(Color.WHITE);
+		
 		highscores = new ArrayList<String>();
 		try {
 			Scanner infile = new Scanner(new File(HIGHSCOREPATH));
-			
 			while (infile.hasNextLine()) {
 				String line = infile.nextLine();
 				this.highscores.add(line);
@@ -76,9 +75,9 @@ public class Console extends VBox {
 		} catch (FileNotFoundException f) {
 			System.out.println(f.getMessage());
 		}
-		
 		highscorelabel = new Label("Highscore Ranking" + "\n#1 " + highscores.get(0) + "\n#2 " + highscores.get(1) + "\n#3 " + highscores.get(2));
 		highscorelabel.setTextFill(Color.WHITE);
+		
 		cookieup = new ClickingUpgrader();
 		autoclickerup = new AutoClickerBuyer();
 		addcookie= new ClickingUpgrader();
@@ -93,12 +92,12 @@ public class Console extends VBox {
 		clickinglevellabel.setTextFill(Color.WHITE);
 		autoclickerlabel.setTextFill(Color.WHITE);
 		addlabel.setTextFill(Color.WHITE);
+		
 		cookieup.setOnAction((e-> {
 			if (score >= clickingcost) {
 				try {
-					Media sound = new Media(new File(UPGRADINGPATH).toURI().toString());
-					MediaPlayer mediaPlayer = new MediaPlayer(sound);
-					mediaPlayer.play();
+					AudioClip sound = new AudioClip(UPGRADINGPATH);
+					sound.play();
 				} catch (Exception f) {
 		            f.printStackTrace();
 				}
@@ -112,9 +111,8 @@ public class Console extends VBox {
 		autoclickerup.setOnAction((e -> {
 			if (score >= autoclickercost) {
 				try {
-					Media sound = new Media(new File(UPGRADINGPATH).toURI().toString());
-					MediaPlayer mediaPlayer = new MediaPlayer(sound);
-					mediaPlayer.play();
+					AudioClip sound = new AudioClip(UPGRADINGPATH);
+					sound.play();
 				} catch (Exception f) {
 		            f.printStackTrace();
 				}
@@ -125,6 +123,7 @@ public class Console extends VBox {
 				autoclickerlabel.setText("Number of Auto-Clickers: "+autoclickerup.getCount()+"\nCost to buy next Auto-Clickers: "+autoclickercost);
 			}
 		}));
+		
 		Timer produce = new Timer();
 		produce.scheduleAtFixedRate(new TimerTask() {
 	        public void run() {

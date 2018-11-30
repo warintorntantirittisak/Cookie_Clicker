@@ -6,8 +6,7 @@ import java.util.Random;
 import javafx.animation.PathTransition;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.AudioClip;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -30,9 +29,8 @@ public class Board extends Pane {
     // Plays background music (Still not add music)
     public void startBgmLoop() {
     	try {
-			Media sound = new Media(new File("bgmpath").toURI().toString());
-			MediaPlayer mediaPlayer = new MediaPlayer(sound);
-			mediaPlayer.play();
+			AudioClip bgm = new AudioClip("bgmpath");
+			bgm.play();
 		} catch (Exception f) {
             f.printStackTrace();
 		}
