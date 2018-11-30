@@ -33,21 +33,7 @@ public class Main extends Application {
 	private Board board;
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		VBox menu = new VBox();
-		menu.setSpacing(10);
-		Label title = new Label("Cookie Clicker");
-		title.setFont(new Font("Ravie", 100));
-		title.setTextFill(Color.WHITE);
-		title.setUnderline(true);
-		Hyperlink start = new Hyperlink("",new ImageView(new Image("start.png")));
-		start.setBorder(Border.EMPTY);
-		menu.getChildren().addAll(title,start);
-		menu.setAlignment(Pos.CENTER);
-		Image menuimage = new Image("bg.jpeg");
-		BackgroundSize backgroundSize = new BackgroundSize(1000, 500, true, true, true, false);
-		BackgroundImage menubackgroundImage = new BackgroundImage(menuimage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
-		Background menubackground = new Background(menubackgroundImage);
-		menu.setBackground(menubackground);
+		WelcomePage menu = new WelcomePage();
 		Scene firstscene = new Scene(menu, 1200,700);
 		primaryStage.setTitle("Cookie Clicker");
 		primaryStage.setScene(firstscene);
@@ -67,6 +53,7 @@ public class Main extends Application {
 		Image image = new Image("bg.jpeg");
 		// new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage, contain, cover)
 		// new BackgroundImage(image, repeatX, repeatY, position, size)
+		BackgroundSize backgroundSize = new BackgroundSize(1000, 500, true, true, true, false);
 		BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
 		// new Background(images...)
 		Background background = new Background(backgroundImage);
@@ -76,7 +63,7 @@ public class Main extends Application {
 		timeElapsed.setTextFill(Color.WHITE);
 		console.getChildren().add(timeElapsed);
 		Scene scene = new Scene(root, 1200,700);
-		start.setOnAction(e->{
+		menu.getStartButton().setOnAction(e->{
 			primaryStage.setScene(scene);
 			interval =300;
 			Alert alert = new Alert(AlertType.INFORMATION);

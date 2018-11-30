@@ -1,5 +1,8 @@
 package logic;
 
-public class Helper {
+import javafx.scene.layout.VBox;
 
+public class Helper extends VBox {
+	
+	
 }
