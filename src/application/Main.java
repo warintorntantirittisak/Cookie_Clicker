@@ -26,10 +26,11 @@ public class Main extends Application {
 	private Board board;
 	WelcomePage menu ;
 	HighScorePage hspage ;
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		 menu = new WelcomePage();
-		 hspage =new HighScorePage();
+		menu = new WelcomePage();
+		hspage =new HighScorePage();
 		Scene firstscene = new Scene(menu, 1200,700);
 		Scene hsscene = new Scene(hspage, 1200,700);
 		primaryStage.setTitle("Cookie Clicker");
@@ -70,15 +71,15 @@ public class Main extends Application {
 		
 		menu.getStartButton().setOnAction(e->{
 			primaryStage.setScene(scene);
-			interval =10;
+			interval = 10;
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Time Out");
 			alert.setHeaderText("Time Out");
 			Thread timer = new Thread(() -> {
-				while (interval>0) {
+				while (interval > 0) {
 					try {
 						Thread.sleep(1000);
-						Platform.runLater(()->timeElapsed.setText("Time Left: "+interval));
+						Platform.runLater(()->timeElapsed.setText("Time Left: "+ interval));
 						interval--;
 					} catch (InterruptedException x) {
 						x.printStackTrace();
@@ -87,22 +88,30 @@ public class Main extends Application {
 					}
 				}
 				Platform.runLater(() -> {
-					alert.setContentText("Your Score : "+console.getScore());	
+					alert.setContentText("Your Score : " + console.getScore());	
 		            alert.showAndWait();
-		            primaryStage.setScene(hsscene);
-		            if(console.getScore()>hspage.getMin()) {
-		            	Button next = new Button("Try Again");
-		            	next.setOnAction(x->{
-		            		primaryStage.setScene(firstscene);
-		            	});
-		            	hspage.getChildren().addAll(next);
-		            }else {
-		            	Button next = new Button("Try Again");
-		            	next.setOnAction(x->{
-		            		primaryStage.setScene(firstscene);
-		            	});
-		            	hspage.getChildren().addAll(next);
+		            
+		            if (console.getScore() > hspage.getFirst()) {
+		            	hspage.setThird(hspage.getSecond());
+		            	hspage.setSecond(hspage.getFirst());
+		            	hspage.setFirst(console.getScore());
+		            	hspage.resetHighscores();
+		            } else if (console.getScore() > hspage.getSecond()) {
+		            	hspage.setThird(hspage.getSecond());
+		            	hspage.setSecond(console.getScore());
+		            	hspage.resetHighscores();
+		            } else if (console.getScore() > hspage.getThird()) {
+		            	hspage.setThird(console.getScore());
+		            	hspage.resetHighscores();
 		            }
+		            
+		            Button next = new Button("Try Again");
+	            	next.setOnAction(x->{
+	            		primaryStage.setScene(firstscene);
+	            	});
+	            	hspage.getChildren().addAll(next);
+	            	
+	            	primaryStage.setScene(hsscene);
 		            console.reset();
 					board.reset();
 					board.addCookie(console);
