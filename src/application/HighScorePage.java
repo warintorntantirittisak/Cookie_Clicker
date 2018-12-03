@@ -58,6 +58,7 @@ public class HighScorePage extends VBox {
 		} catch (FileNotFoundException f) {
 			System.out.println(f.getMessage());
 		}
+		highscorelistlabel.setText("#1: " + highscores.get(0) + "\n#2 :" + highscores.get(1) + "\n#3 :" + highscores.get(2));
 	}
 	
 	public Button getRetryBtn() {
