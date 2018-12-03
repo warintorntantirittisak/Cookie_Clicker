@@ -1,38 +1,37 @@
 package application;
 
-import java.io.IOException;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.Border;
+
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
+
 import javafx.stage.Stage;
 
 public class Main extends Application {
 	private int interval;
 	private Console console;
 	private Board board;
+	WelcomePage menu ;
+	HighScorePage hspage ;
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		WelcomePage menu = new WelcomePage();
+		 menu = new WelcomePage();
+		 hspage =new HighScorePage();
 		Scene firstscene = new Scene(menu, 1200,700);
-		
+		Scene hsscene = new Scene(hspage, 1200,700);
 		primaryStage.setTitle("Cookie Clicker");
 		primaryStage.setScene(firstscene);
 		
@@ -71,7 +70,7 @@ public class Main extends Application {
 		
 		menu.getStartButton().setOnAction(e->{
 			primaryStage.setScene(scene);
-			interval =300;
+			interval =10;
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Time Out");
 			alert.setHeaderText("Time Out");
@@ -90,7 +89,20 @@ public class Main extends Application {
 				Platform.runLater(() -> {
 					alert.setContentText("Your Score : "+console.getScore());	
 		            alert.showAndWait();
-		            primaryStage.setScene(firstscene);
+		            primaryStage.setScene(hsscene);
+		            if(console.getScore()>hspage.getMin()) {
+		            	Button next = new Button("Try Again");
+		            	next.setOnAction(x->{
+		            		primaryStage.setScene(firstscene);
+		            	});
+		            	hspage.getChildren().addAll(next);
+		            }else {
+		            	Button next = new Button("Try Again");
+		            	next.setOnAction(x->{
+		            		primaryStage.setScene(firstscene);
+		            	});
+		            	hspage.getChildren().addAll(next);
+		            }
 		            console.reset();
 					board.reset();
 					board.addCookie(console);

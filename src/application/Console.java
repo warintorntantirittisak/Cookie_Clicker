@@ -24,7 +24,6 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import logic.AutoClickerBuyer;
@@ -32,10 +31,7 @@ import logic.ClickingUpgrader;
 
 public class Console extends VBox {
 	private int score;
-	private ArrayList<String> highscores;
 	private Label scorelabel;
-	private Label highscoreheaderlabel;
-	private Label highscorelistlabel;
 	private Label clickinglevellabel;
 	private Label autoclickerlabel;
 	private Label addlabel;
@@ -45,7 +41,6 @@ public class Console extends VBox {
 	private ClickingUpgrader cookieup;
 	private AutoClickerBuyer autoclickerup;
 	private ClickingUpgrader addcookie;
-	private static String highscorePath;
 	private static String upgradingPath;
 	
 	public Console() throws IOException {
@@ -68,23 +63,6 @@ public class Console extends VBox {
 		scorelabel.setFont(Font.font(20));
 		scorelabel.setTextFill(Color.WHITE);
 		
-		highscores = new ArrayList<String>();
-		try {
-			Scanner infile = new Scanner(new File(highscorePath));
-			while (infile.hasNextLine()) {
-				String line = infile.nextLine();
-				this.highscores.add(line);
-			}
-			infile.close();
-		} catch (FileNotFoundException f) {
-			System.out.println(f.getMessage());
-		}
-		highscoreheaderlabel = new Label("Highscore Ranking");
-		highscoreheaderlabel.setFont(Font.font(20));
-		highscoreheaderlabel.setTextFill(Color.WHITE);
-		
-		highscorelistlabel = new Label("#1: " + highscores.get(0) + "\n#2 :" + highscores.get(1) + "\n#3 :" + highscores.get(2));
-		highscorelistlabel.setTextFill(Color.WHITE);
 		
 		cookieup = new ClickingUpgrader();
 		autoclickerup = new AutoClickerBuyer();
@@ -133,7 +111,7 @@ public class Console extends VBox {
 	        }
 	    }, 1000, 1000);
 	
-		getChildren().addAll(scorelabel,highscoreheaderlabel,highscorelistlabel,clickinglevellabel,cookieup,autoclickerlabel,autoclickerup,addlabel,addcookie);
+		getChildren().addAll(scorelabel,clickinglevellabel,cookieup,autoclickerlabel,autoclickerup,addlabel,addcookie);
 		setMinSize(200,200);
 	}
 	
@@ -190,7 +168,6 @@ public class Console extends VBox {
 		addlabel.setText("Number of Cookies: "+addcookie.getLevel()+"\nCost to add more: "+addcost);
 	}
 	public static void loadPath() {
-		highscorePath ="res/highscore.txt";
 		upgradingPath = "res/upgrading.mp3".toString();
 	}
 }
