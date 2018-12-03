@@ -103,14 +103,9 @@ public class Main extends Application {
 		            } else if (console.getScore() > hspage.getThird()) {
 		            	hspage.setThird(console.getScore());
 		            	hspage.resetHighscores();
-		            }
+		            } 
+		            hspage.getRetryBtn().setOnAction(x->{primaryStage.setScene(firstscene);});
 		            
-		            Button next = new Button("Try Again");
-	            	next.setOnAction(x->{
-	            		primaryStage.setScene(firstscene);
-	            	});
-	            	hspage.getChildren().addAll(next);
-	            	
 	            	primaryStage.setScene(hsscene);
 		            console.reset();
 					board.reset();

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -17,6 +18,7 @@ public class HighScorePage extends VBox {
 	private Label highscorelistlabel;
 	private static String highscorePath ="res/highscore.txt";;
 	private ArrayList<Integer> highscores;
+	private Button retryBtn;
 	
 	public HighScorePage() {
 		setSpacing(10);
@@ -40,7 +42,10 @@ public class HighScorePage extends VBox {
 	
 		highscorelistlabel = new Label("#1: " + highscores.get(0) + "\n#2 :" + highscores.get(1) + "\n#3 :" + highscores.get(2));
 		highscorelistlabel.setTextFill(Color.BLACK);
-		getChildren().addAll(highscoreheaderlabel,highscorelistlabel);
+		
+		retryBtn = new Button("Try Again");
+		
+		getChildren().addAll(highscoreheaderlabel,highscorelistlabel,retryBtn);
 	}
 	
 	public void resetHighscores() {
@@ -53,6 +58,10 @@ public class HighScorePage extends VBox {
 		} catch (FileNotFoundException f) {
 			System.out.println(f.getMessage());
 		}
+	}
+	
+	public Button getRetryBtn() {
+		return this.retryBtn;
 	}
 	
 	public int getThird(){
