@@ -24,6 +24,7 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import logic.AutoClickerBuyer;
@@ -102,7 +103,7 @@ public class Console extends VBox {
 		
 		cookieup.setOnAction((e-> {
 			if (score >= clickingcost) {
-				AudioClip sound = new AudioClip(upgradingPath);
+				AudioClip sound = new AudioClip(new File(upgradingPath).toURI().toString());
 				sound.play();
 				addScore(-clickingcost);
 				cookieup.levelUp();
@@ -189,7 +190,7 @@ public class Console extends VBox {
 		addlabel.setText("Number of Cookies: "+addcookie.getLevel()+"\nCost to add more: "+addcost);
 	}
 	public static void loadPath() {
-		highscorePath = ClassLoader.getSystemResource("res/highscore.txt").toString();
-		upgradingPath = ClassLoader.getSystemResource("res/upgrading.mp3").toString();
+		highscorePath ="res/highscore.txt";
+		upgradingPath = "res/upgrading.mp3".toString();
 	}
 }
