@@ -43,11 +43,11 @@ public class Main extends Application {
 		board.addCookie(console);
 		console.getAddUpgrade().setOnAction(e-> {
 			if(console.getScore()>=console.getAddCost()) {
-			board.addCookie(console);
-			console.getAddUpgrade().levelUp();
-			console.addScore(-console.getAddCost());
-			console.setAddCost(console.getAddUpgrade().getLevel()*50);
-			console.getAddlabel().setText("Number of Cookies: "+console.getAddUpgrade().getLevel()+"\n Cost to next level: "+console.getAddCost());
+				board.addCookie(console);
+				console.getAddUpgrade().levelUp();
+				console.addScore(-console.getAddCost());
+				console.setAddCost(console.getAddUpgrade().getLevel()*50);
+				console.getAddlabel().setText("Number of Cookies: "+console.getAddUpgrade().getLevel()+"\n Cost to next level: "+console.getAddCost());
 			}
 		});
 		
@@ -103,8 +103,7 @@ public class Main extends Application {
 		            } else if (console.getScore() > hspage.getThird()) {
 		            	hspage.setThird(console.getScore());
 		            	hspage.resetHighscores();
-		            } 
-		            hspage.getRetryBtn().setOnAction(x->{primaryStage.setScene(firstscene);});
+		            }
 		            
 	            	primaryStage.setScene(hsscene);
 		            console.reset();
@@ -114,6 +113,9 @@ public class Main extends Application {
 			});
 			timer.start();
 		});
+		menu.getHighscoresBtn().setOnAction(x->{primaryStage.setScene(hsscene);});
+		hspage.getMenuBtn().setOnAction(x->{primaryStage.setScene(firstscene);});
+		
 		primaryStage.show();
 		primaryStage.setResizable(false);
 	}

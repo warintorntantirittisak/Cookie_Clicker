@@ -1,6 +1,7 @@
 package application;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -17,6 +18,7 @@ import javafx.scene.text.Font;
 
 public class WelcomePage extends VBox{
 	private Hyperlink start;
+	private Button highscoresBtn;
 	
 	public WelcomePage() {
 		setSpacing(10);
@@ -30,7 +32,9 @@ public class WelcomePage extends VBox{
 		start = new Hyperlink("",new ImageView(new Image("start.png")));
 		start.setBorder(Border.EMPTY);
 		
-		getChildren().addAll(title,start);
+		highscoresBtn = new Button("Highscore Ranking");
+		
+		getChildren().addAll(title,start,highscoresBtn);
 	
 		Image menuimage = new Image("bg.jpeg");
 		
@@ -38,6 +42,10 @@ public class WelcomePage extends VBox{
 		BackgroundImage menubackgroundImage = new BackgroundImage(menuimage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
 		Background menubackground = new Background(menubackgroundImage);
 		setBackground(menubackground);
+	}
+	
+	public Button getHighscoresBtn() {
+		return this.highscoresBtn;
 	}
 	
 	public Hyperlink getStartButton() {

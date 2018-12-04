@@ -18,7 +18,7 @@ public class HighScorePage extends VBox {
 	private Label highscorelistlabel;
 	private static String highscorePath ="res/highscore.txt";;
 	private ArrayList<Integer> highscores;
-	private Button retryBtn;
+	private Button menuBtn;
 	
 	public HighScorePage() {
 		setSpacing(10);
@@ -43,9 +43,9 @@ public class HighScorePage extends VBox {
 		highscorelistlabel = new Label("#1: " + highscores.get(0) + "\n#2 :" + highscores.get(1) + "\n#3 :" + highscores.get(2));
 		highscorelistlabel.setTextFill(Color.BLACK);
 		
-		retryBtn = new Button("Try Again");
+		menuBtn = new Button("Main Menu");
 		
-		getChildren().addAll(highscoreheaderlabel,highscorelistlabel,retryBtn);
+		getChildren().addAll(highscoreheaderlabel,highscorelistlabel,menuBtn);
 	}
 	
 	public void resetHighscores() {
@@ -61,8 +61,8 @@ public class HighScorePage extends VBox {
 		highscorelistlabel.setText("#1: " + highscores.get(0) + "\n#2 :" + highscores.get(1) + "\n#3 :" + highscores.get(2));
 	}
 	
-	public Button getRetryBtn() {
-		return this.retryBtn;
+	public Button getMenuBtn() {
+		return this.menuBtn;
 	}
 	
 	public int getThird(){
