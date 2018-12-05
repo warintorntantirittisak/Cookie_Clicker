@@ -75,7 +75,7 @@ public class Main extends Application {
 		
 		menu.getStartButton().setOnAction(e->{
 			primaryStage.setScene(scene);
-			interval = 10;
+			interval = 15;
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Time Out");
 			alert.setHeaderText("Time Out");
@@ -85,6 +85,7 @@ public class Main extends Application {
 						Thread.sleep(1000);
 						Platform.runLater(()->timeElapsed.setText("Time Left: "+ interval));
 						interval--;
+						if (interval <= 10) timeElapsed.setTextFill(Color.RED);
 					} catch (InterruptedException x) {
 						x.printStackTrace();
 						System.out.println("Stop Timer Thread");
