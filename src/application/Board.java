@@ -17,11 +17,12 @@ public class Board extends Pane {
 	Random ran = new Random();
 	public Board() {
 		setPadding(new Insets(15));
+		setPrefWidth(850);
 	}
 	
-	public void addCookie(Console console) {
+	public void addCookie(Console console,LevelPane lp) {
 		Cookie cookie = new Cookie();
-		cookie.setUpCookie(console);
+		cookie.setUpCookie(console,lp);
 		getChildren().addAll(cookie);
     }
     

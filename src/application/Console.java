@@ -92,7 +92,7 @@ public class Console extends VBox {
 		
 		autoclickerup.setOnAction((e -> {
 			if (score >= autoclickercost) {
-				AudioClip sound = new AudioClip(upgradingPath);
+				AudioClip sound = new AudioClip(new File(upgradingPath).toURI().toString());
 				sound.play();
 				addScore(-autoclickercost);
 				autoclickerup.getMoreClicker();
@@ -168,6 +168,6 @@ public class Console extends VBox {
 		addlabel.setText("Number of Cookies: "+addcookie.getLevel()+"\nCost to add more: "+addcost);
 	}
 	public static void loadPath() {
-		upgradingPath = "res/upgrading.mp3".toString();
+		upgradingPath = "res/upgrading.mp3";
 	}
 }

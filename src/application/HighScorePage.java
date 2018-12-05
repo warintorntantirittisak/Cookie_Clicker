@@ -9,6 +9,12 @@ import java.util.Scanner;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -23,6 +29,11 @@ public class HighScorePage extends VBox {
 	public HighScorePage() {
 		setSpacing(10);
 		setAlignment(Pos.CENTER);
+		Image menuimage = new Image("bg.jpeg");
+		BackgroundSize backgroundSize = new BackgroundSize(1000, 500, true, true, true, false);
+		BackgroundImage menubackgroundImage = new BackgroundImage(menuimage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+		Background menubackground = new Background(menubackgroundImage);
+		setBackground(menubackground);
 		highscores = new ArrayList<Integer>();
 	
 		try {
@@ -37,12 +48,12 @@ public class HighScorePage extends VBox {
 		}
 	
 		highscoreheaderlabel = new Label("Highscore Ranking");
-		highscoreheaderlabel.setFont(Font.font(20));
-		highscoreheaderlabel.setTextFill(Color.BLACK);
+		highscoreheaderlabel.setFont(Font.font(100));
+		highscoreheaderlabel.setTextFill(Color.WHITE);
 	
 		highscorelistlabel = new Label("#1: " + highscores.get(0) + "\n#2 :" + highscores.get(1) + "\n#3 :" + highscores.get(2));
-		highscorelistlabel.setTextFill(Color.BLACK);
-		
+		highscorelistlabel.setTextFill(Color.WHITE);
+		highscorelistlabel.setFont(Font.font(60));
 		menuBtn = new Button("Main Menu");
 		
 		getChildren().addAll(highscoreheaderlabel,highscorelistlabel,menuBtn);

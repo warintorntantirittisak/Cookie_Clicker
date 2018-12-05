@@ -24,8 +24,9 @@ public class Main extends Application {
 	private int interval;
 	private Console console;
 	private Board board;
-	WelcomePage menu ;
-	HighScorePage hspage ;
+	private LevelPane levelpane;
+	private WelcomePage menu ;
+	private HighScorePage hspage ;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -40,10 +41,11 @@ public class Main extends Application {
 		
 		console = new Console();
 		board = new Board();
-		board.addCookie(console);
+		levelpane= new LevelPane();
+		board.addCookie(console,levelpane);
 		console.getAddUpgrade().setOnAction(e-> {
 			if(console.getScore()>=console.getAddCost()) {
-				board.addCookie(console);
+				board.addCookie(console,levelpane);
 				console.getAddUpgrade().levelUp();
 				console.addScore(-console.getAddCost());
 				console.setAddCost(console.getAddUpgrade().getLevel()*50);
@@ -60,7 +62,7 @@ public class Main extends Application {
 		Background background = new Background(backgroundImage);
 		
 		root.setBackground(background);
-		root.getChildren().addAll(console,board);
+		root.getChildren().addAll(console,board,levelpane);
 		
 		Label timeElapsed = new Label();
 		timeElapsed.setTextFill(Color.WHITE);
@@ -108,7 +110,7 @@ public class Main extends Application {
 	            	primaryStage.setScene(hsscene);
 		            console.reset();
 					board.reset();
-					board.addCookie(console);
+					board.addCookie(console,levelpane);
 				   });
 			});
 			timer.start();
