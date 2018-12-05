@@ -17,7 +17,7 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 
 import javafx.scene.paint.Color;
-
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -49,7 +49,8 @@ public class Main extends Application {
 				console.getAddUpgrade().levelUp();
 				console.addScore(-console.getAddCost());
 				console.setAddCost(console.getAddUpgrade().getLevel()*50);
-				console.getAddlabel().setText("Number of Cookies: "+console.getAddUpgrade().getLevel()+"\n Cost to next level: "+console.getAddCost());
+				console.getAddlabel().setText("Cookies ("+console.getAddUpgrade().getLevel());
+				console.getAddCostlabel().setText("Cost to add one more cookie: "+console.getAddCost());
 			}
 		});
 		
@@ -66,6 +67,7 @@ public class Main extends Application {
 		
 		Label timeElapsed = new Label();
 		timeElapsed.setTextFill(Color.WHITE);
+		timeElapsed.setFont(Font.font(30));
 		
 		console.getChildren().add(timeElapsed);
 		
@@ -97,14 +99,14 @@ public class Main extends Application {
 		            	hspage.setThird(hspage.getSecond());
 		            	hspage.setSecond(hspage.getFirst());
 		            	hspage.setFirst(console.getScore());
-		            	hspage.resetHighscores();
+		            	hspage.refreshHighscores();
 		            } else if (console.getScore() > hspage.getSecond()) {
 		            	hspage.setThird(hspage.getSecond());
 		            	hspage.setSecond(console.getScore());
-		            	hspage.resetHighscores();
+		            	hspage.refreshHighscores();
 		            } else if (console.getScore() > hspage.getThird()) {
 		            	hspage.setThird(console.getScore());
-		            	hspage.resetHighscores();
+		            	hspage.refreshHighscores();
 		            }
 		            
 	            	primaryStage.setScene(hsscene);

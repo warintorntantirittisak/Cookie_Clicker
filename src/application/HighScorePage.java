@@ -59,7 +59,7 @@ public class HighScorePage extends VBox {
 		getChildren().addAll(highscoreheaderlabel,highscorelistlabel,menuBtn);
 	}
 	
-	public void resetHighscores() {
+	public void refreshHighscores() {
 		try {
 			PrintStream outfile = new PrintStream(new File(highscorePath));
 			for (int i = 0; i < highscores.size(); i++) {

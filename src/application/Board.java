@@ -32,7 +32,7 @@ public class Board extends Pane {
 		bgmPath = "res/Fluffing a Duck.mp3";
 	}
     
-    // Plays background music (Still not add music)
+    // Plays background music
     public void startBgmLoop() {
 		AudioClip bgm = new AudioClip(new File(bgmPath).toURI().toString());
 		bgm.play();
