@@ -60,4 +60,9 @@ public class LevelPane extends VBox {
 	public double getBarProgress() {
 		return this.progress;
 	}
+	public void reset() {
+		level=1;
+		setLabel();
+		setBarProgress(-progress);
+	}
 }

@@ -186,12 +186,12 @@ public class Console extends VBox {
 		clickingcost = cookieup.getUpgradeCost();
 		autoclickercost = autoclickerup.getCost();
 		addcost = addcookie.getUpgradeCost();
-		clickinglevellabel = new Label("Clicking Proficiency (Level "+cookieup.getLevel()+")");
-		clickinglevelcostlabel = new Label("Cost to next level: "+clickingcost);
-		autoclickerlabel = new Label("Auto-Clickers ("+autoclickerup.getCount()+" clickers)");
-		autoclickercostlabel = new Label("Cost to buy next Auto-Clickers: "+autoclickercost);
-		addlabel = new Label("Cookies ("+addcookie.getLevel()+" cookies on board");
-		addcostlabel = new Label("Cost to add one more cookie: "+addcost);
+		clickinglevellabel.setText("Clicking Proficiency (Level "+cookieup.getLevel()+")");
+		clickinglevelcostlabel.setText("Cost to next level: "+clickingcost);
+		autoclickerlabel.setText("Auto-Clickers ("+autoclickerup.getCount()+" clickers)");
+		autoclickercostlabel.setText("Cost to buy next Auto-Clickers: "+autoclickercost);
+		addlabel.setText("Cookies ("+addcookie.getLevel()+" cookies on board)");
+		addcostlabel.setText("Cost to add one more cookie: "+addcost);
 	}
 	public static void loadPath() {
 		upgradingPath = "res/upgrading.mp3";

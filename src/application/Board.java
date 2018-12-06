@@ -35,6 +35,7 @@ public class Board extends Pane {
     // Plays background music
     public void startBgmLoop() {
 		AudioClip bgm = new AudioClip(new File(bgmPath).toURI().toString());
+		bgm.setCycleCount(AudioClip.INDEFINITE);
 		bgm.play();
     }
     public void reset() {

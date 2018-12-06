@@ -70,12 +70,12 @@ public class Main extends Application {
 		timeElapsed.setFont(Font.font(30));
 		
 		console.getChildren().add(timeElapsed);
-		
+		board.startBgmLoop();
 		Scene scene = new Scene(root, 1200,700);
 		
 		menu.getStartButton().setOnAction(e->{
 			primaryStage.setScene(scene);
-			interval = 15;
+			interval = 60;
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Time Out");
 			alert.setHeaderText("Time Out");
@@ -93,6 +93,7 @@ public class Main extends Application {
 					}
 				}
 				Platform.runLater(() -> {
+					timeElapsed.setTextFill(Color.WHITE);
 					alert.setContentText("Your Score : " + console.getScore());	
 		            alert.showAndWait();
 		            
@@ -112,6 +113,7 @@ public class Main extends Application {
 		            
 	            	primaryStage.setScene(hsscene);
 		            console.reset();
+		            levelpane.reset();
 					board.reset();
 					board.addCookie(console,levelpane);
 				   });

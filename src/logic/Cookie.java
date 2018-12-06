@@ -29,6 +29,7 @@ public class Cookie extends ImageView {
 		oldy=10;
 	}
 	public void setUpCookie(Console console,LevelPane lp) {
+		this.speed=2000-lp.getLevel()*100;
 		setOnMouseClicked(e-> {
 			try {
 				Media sound = new Media(new File(COOKIECLICKPATH).toURI().toString());
@@ -38,7 +39,11 @@ public class Cookie extends ImageView {
 	            f.printStackTrace();
 			}
 			console.addScore(console.getClickingUpgrade().getLevel());
+			if(lp.getLevel()>10) {
+			lp.setBarProgress(0.02);
+			}else {
 			lp.setBarProgress(0.05);
+			}
 			if(lp.getBarProgress()>=1) {
 				lp.setLevel(lp.getLevel()+1);
 				lp.setLabel();
@@ -64,8 +69,8 @@ public class Cookie extends ImageView {
 }
 
 	private Path createPath() {
-    int x = ran.nextInt(850-75  + 1)+75; // min=300 , max=600
-    int y = ran.nextInt(700-75  + 1)+75;
+    int x = ran.nextInt(825-75  + 1)+75; // min=300 , max=600
+    int y = ran.nextInt(675-75  + 1)+75;
     Path path = new Path();
     path.getElements().add(new MoveTo(oldx, oldy));
     this.oldx=x;
@@ -76,5 +81,6 @@ public class Cookie extends ImageView {
  public void setSpeed(int s) {
 	this.speed=s;
  }
+
 }
 
