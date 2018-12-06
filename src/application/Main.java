@@ -27,6 +27,7 @@ public class Main extends Application {
 	private LevelPane levelpane;
 	private WelcomePage menu ;
 	private HighScorePage hspage ;
+	private Thread timer ;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -76,10 +77,11 @@ public class Main extends Application {
 		menu.getStartButton().setOnAction(e->{
 			primaryStage.setScene(scene);
 			interval = 60;
+			timeElapsed.setText("Time Left: "+ interval);
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Time Out");
 			alert.setHeaderText("Time Out");
-			Thread timer = new Thread(() -> {
+			timer = new Thread(() -> {
 				while (interval > 0) {
 					try {
 						Thread.sleep(1000);
@@ -87,12 +89,11 @@ public class Main extends Application {
 						interval--;
 						if (interval <= 10) timeElapsed.setTextFill(Color.RED);
 					} catch (InterruptedException x) {
-						x.printStackTrace();
-						System.out.println("Stop Timer Thread");
 						break;
 					}
 				}
 				Platform.runLater(() -> {
+					if(interval<=0) {
 					timeElapsed.setTextFill(Color.WHITE);
 					alert.setContentText("Your Score : " + console.getScore());	
 		            alert.showAndWait();
@@ -116,6 +117,7 @@ public class Main extends Application {
 		            levelpane.reset();
 					board.reset();
 					board.addCookie(console,levelpane);
+					}
 				   });
 			});
 			timer.start();
@@ -123,6 +125,7 @@ public class Main extends Application {
 		menu.getHighscoresBtn().setOnAction(x->{primaryStage.setScene(hsscene);});
 		hspage.getMenuBtn().setOnAction(x->{primaryStage.setScene(firstscene);});
 		levelpane.getMenuBtn().setOnAction(x->{
+			timer.interrupt();;
 			primaryStage.setScene(firstscene);
 			console.reset();
             levelpane.reset();
