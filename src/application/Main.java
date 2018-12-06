@@ -122,6 +122,17 @@ public class Main extends Application {
 		});
 		menu.getHighscoresBtn().setOnAction(x->{primaryStage.setScene(hsscene);});
 		hspage.getMenuBtn().setOnAction(x->{primaryStage.setScene(firstscene);});
+		levelpane.getMenuBtn().setOnAction(x->{
+			primaryStage.setScene(firstscene);
+			console.reset();
+            levelpane.reset();
+			board.reset();
+			board.addCookie(console,levelpane);
+			});
+		menu.getExitButton().setOnAction(x->{ 
+		Platform.exit();
+        System.exit(0);
+        });
 		
 		primaryStage.show();
 		primaryStage.setResizable(false);

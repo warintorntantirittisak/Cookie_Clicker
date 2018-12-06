@@ -87,9 +87,9 @@ public class Console extends VBox {
 		autoclickercostlabel.setTextFill(Color.WHITE);
 		addlabel.setTextFill(Color.WHITE);
 		addcostlabel.setTextFill(Color.WHITE);
-		clickinglevellabel.setFont(Font.font(20));
-		autoclickerlabel.setFont(Font.font(20));
-		addlabel.setFont(Font.font(20));
+		clickinglevellabel.setFont(Font.font(15));
+		autoclickerlabel.setFont(Font.font(15));
+		addlabel.setFont(Font.font(15));
 		
 		cookieup.setOnAction((e-> {
 			if (score >= clickingcost) {

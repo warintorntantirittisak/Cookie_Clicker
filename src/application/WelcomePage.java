@@ -12,13 +12,15 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Border;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class WelcomePage extends VBox{
 	private Hyperlink start;
-	private Button highscoresBtn;
+	private Hyperlink highscoresBtn;
+	private Hyperlink exit;
 	
 	public WelcomePage() {
 		setSpacing(10);
@@ -32,9 +34,19 @@ public class WelcomePage extends VBox{
 		start = new Hyperlink("",new ImageView(new Image("start.png")));
 		start.setBorder(Border.EMPTY);
 		
-		highscoresBtn = new Button("Highscore Ranking");
+		highscoresBtn = new Hyperlink("",new ImageView(new Image("hs.png",150,150,true,true)));
+		highscoresBtn.setBorder(Border.EMPTY);
 		
-		getChildren().addAll(title,start,highscoresBtn);
+		exit = new Hyperlink("",new ImageView(new Image("exit.png",150,150,true,true)));
+		exit.setBorder(Border.EMPTY);
+		
+		HBox menubutton = new HBox();
+		menubutton.setAlignment(Pos.CENTER);
+		menubutton.setSpacing(10);
+		menubutton.getChildren().addAll(highscoresBtn,start,exit);
+	
+		
+		getChildren().addAll(title,menubutton);
 	
 		Image menuimage = new Image("bg.jpeg");
 		
@@ -44,11 +56,14 @@ public class WelcomePage extends VBox{
 		setBackground(menubackground);
 	}
 	
-	public Button getHighscoresBtn() {
+	public Hyperlink getHighscoresBtn() {
 		return this.highscoresBtn;
 	}
 	
 	public Hyperlink getStartButton() {
 		return this.start;
+	}
+	public Hyperlink getExitButton() {
+		return this.exit;
 	}
 }

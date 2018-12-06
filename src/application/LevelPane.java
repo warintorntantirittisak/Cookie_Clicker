@@ -1,9 +1,11 @@
 package application;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -22,6 +24,7 @@ public class LevelPane extends VBox {
 	private Label levellabel;
 	private ProgressBar levelbar ;
 	private double progress;
+	private Hyperlink MainMenu;
 	public LevelPane() {
 		setSpacing(10);
 		setAlignment(Pos.CENTER);
@@ -39,7 +42,12 @@ public class LevelPane extends VBox {
 		levellabel.setTextFill(Color.WHITE);
 		levelbar = new  ProgressBar();
 		levelbar.setProgress(progress);
-		getChildren().addAll(levellabel,levelbar);
+		MainMenu = new Hyperlink("",new ImageView(new Image("main.png",50,50,true,true)));
+		MainMenu.setBorder(Border.EMPTY);
+		getChildren().addAll(levellabel,levelbar, MainMenu);
+	}
+	public Hyperlink getMenuBtn() {
+		return this.MainMenu;
 	}
 	public ProgressBar getBar() {
 		return this.levelbar;

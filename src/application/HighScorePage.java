@@ -8,13 +8,16 @@ import java.util.Scanner;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -24,7 +27,7 @@ public class HighScorePage extends VBox {
 	private Label highscorelistlabel;
 	private static String highscorePath ="res/highscore.txt";;
 	private ArrayList<Integer> highscores;
-	private Button menuBtn;
+	private Hyperlink MainMenu;
 	
 	public HighScorePage() {
 		setSpacing(10);
@@ -54,9 +57,10 @@ public class HighScorePage extends VBox {
 		highscorelistlabel = new Label("#1: " + highscores.get(0) + "\n#2 :" + highscores.get(1) + "\n#3 :" + highscores.get(2));
 		highscorelistlabel.setTextFill(Color.WHITE);
 		highscorelistlabel.setFont(Font.font(60));
-		menuBtn = new Button("Main Menu");
+		MainMenu = new Hyperlink("",new ImageView(new Image("main.png",150,150,true,true)));
+		MainMenu.setBorder(Border.EMPTY);
 		
-		getChildren().addAll(highscoreheaderlabel,highscorelistlabel,menuBtn);
+		getChildren().addAll(highscoreheaderlabel,highscorelistlabel,MainMenu);
 	}
 	
 	public void refreshHighscores() {
@@ -72,8 +76,8 @@ public class HighScorePage extends VBox {
 		highscorelistlabel.setText("#1: " + highscores.get(0) + "\n#2 :" + highscores.get(1) + "\n#3 :" + highscores.get(2));
 	}
 	
-	public Button getMenuBtn() {
-		return this.menuBtn;
+	public Hyperlink getMenuBtn() {
+		return this.MainMenu;
 	}
 	
 	public int getThird(){
