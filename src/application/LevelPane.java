@@ -31,7 +31,7 @@ public class LevelPane extends VBox {
 		setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, 
 				CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		
-		Image consoleimage = new Image("consolebg.jpg");
+		Image consoleimage = new Image(ClassLoader.getSystemResource("image/consolebg.jpg").toString());
 		BackgroundSize backgroundSize = new BackgroundSize(1000, 500, true, true, true, false);
 		BackgroundImage consolebackgroundImage = new BackgroundImage(consoleimage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
 		Background consolebackground = new Background(consolebackgroundImage);
@@ -42,7 +42,7 @@ public class LevelPane extends VBox {
 		levellabel.setTextFill(Color.WHITE);
 		levelbar = new  ProgressBar();
 		levelbar.setProgress(progress);
-		MainMenu = new Hyperlink("",new ImageView(new Image("main.png",50,50,true,true)));
+		MainMenu = new Hyperlink("",new ImageView(new Image(ClassLoader.getSystemResource("image/main.png").toString(),50,50,true,true)));
 		MainMenu.setBorder(Border.EMPTY);
 		getChildren().addAll(levellabel,levelbar, MainMenu);
 	}
