@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -25,15 +24,22 @@ import javafx.util.Pair;
 
 public class HighScorePage extends VBox {
 	private Label highscoreheaderlabel;
-	private Label highscorelistlabel;
-	private static String highscorePath ="res/highscore.txt";;
+	private Label highscorelabel1;
+	private Label highscorelabel2;	
+	private Label highscorelabel3;	
 	private ArrayList<Pair<String,Integer>> highscores;
 	private Hyperlink MainMenu;
+	private static String bgPath;
+	private static String highscorePath;
+	private static String mainPath;
 	
 	public HighScorePage() {
 		setSpacing(10);
 		setAlignment(Pos.CENTER);
-		Image menuimage = new Image("bg.jpeg");
+		
+		loadPath();
+		
+		Image menuimage = new Image(bgPath);
 		BackgroundSize backgroundSize = new BackgroundSize(1000, 500, true, true, true, false);
 		BackgroundImage menubackgroundImage = new BackgroundImage(menuimage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
 		Background menubackground = new Background(menubackgroundImage);
@@ -57,15 +63,20 @@ public class HighScorePage extends VBox {
 		highscoreheaderlabel.setFont(Font.font(100));
 		highscoreheaderlabel.setTextFill(Color.WHITE);
 	
-		highscorelistlabel = new Label("#1: " + highscores.get(0).getKey() + "     " + highscores.get(0).getValue() 
-				+ "\n#2 :" + highscores.get(1).getKey() + "     " + highscores.get(1).getValue() 
-				+ "\n#3 :" + highscores.get(2).getKey() + "     " + highscores.get(2).getValue());
-		highscorelistlabel.setTextFill(Color.WHITE);
-		highscorelistlabel.setFont(Font.font(60));
-		MainMenu = new Hyperlink("",new ImageView(new Image("main.png",150,150,true,true)));
+		highscorelabel1 = new Label("#1: " + highscores.get(0).getKey() + "     " + highscores.get(0).getValue());
+		highscorelabel2 = new Label("#2 :" + highscores.get(1).getKey() + "     " + highscores.get(1).getValue());
+		highscorelabel3 = new Label("#3 :" + highscores.get(2).getKey() + "     " + highscores.get(2).getValue());
+		highscorelabel1.setTextFill(Color.WHITE);
+		highscorelabel1.setFont(Font.font(60));
+		highscorelabel2.setTextFill(Color.WHITE);
+		highscorelabel2.setFont(Font.font(60));
+		highscorelabel3.setTextFill(Color.WHITE);
+		highscorelabel3.setFont(Font.font(60));
+		
+		MainMenu = new Hyperlink("",new ImageView(new Image(mainPath,150,150,true,true)));
 		MainMenu.setBorder(Border.EMPTY);
 		
-		getChildren().addAll(highscoreheaderlabel,highscorelistlabel,MainMenu);
+		getChildren().addAll(highscoreheaderlabel,highscorelabel1,highscorelabel2,highscorelabel3,MainMenu);
 	}
 	
 	public void refreshHighscores() {
@@ -79,9 +90,19 @@ public class HighScorePage extends VBox {
 		} catch (FileNotFoundException f) {
 			System.out.println(f.getMessage());
 		}
-		highscorelistlabel.setText("#1: " + highscores.get(0).getKey() + "     " + highscores.get(0).getValue()
-				+ "\n#2 :" + highscores.get(1).getKey() + "     " + highscores.get(1).getValue() 
-				+ "\n#3 :" + highscores.get(2).getKey() + "     "+ highscores.get(2).getValue());
+		highscorelabel1.setText("#1: " + highscores.get(0).getKey() + "     " + highscores.get(0).getValue());
+		highscorelabel2.setText("#2 :" + highscores.get(1).getKey() + "     " + highscores.get(1).getValue());
+		highscorelabel3.setText("#3 :" + highscores.get(2).getKey() + "     " + highscores.get(2).getValue());
+	}
+	
+	private static void loadPath() {
+		try {
+			bgPath = ClassLoader.getSystemResource("image/bg.jpeg").toString();
+			highscorePath = ClassLoader.getSystemResource("textfile/highscore.txt").toString();
+			mainPath = ClassLoader.getSystemResource("image/main.png").toString();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
 	}
 	
 	public Hyperlink getMenuBtn() {

@@ -1,40 +1,36 @@
 package logic;
 
 
-import java.io.File;
 import java.util.Random;
-
 import application.Console;
 import application.LevelPane;
 import javafx.animation.PathTransition;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.AudioClip;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 
 public class Cookie extends ImageView {
 	public int oldx;
-	public  int oldy;
+	public int oldy;
 	private int speed =2000;
-	Random ran = new Random();
-	private static final String COOKIECLICKPATH ="res/cookie_click.mp3";
+	private Random ran = new Random();
+	private static final String COOKIECLICKPATH = ClassLoader.getSystemResource("audio/cookie_click.mp3").toString();
+	
 	public Cookie() {
-		super(new Image(ClassLoader.getSystemResource("Cookie.gif").toString()));
+		super(new Image(ClassLoader.getSystemResource("image/Cookie.gif").toString()));
 		oldx=75;
 		oldy=10;
 	}
+	
 	public void setUpCookie(Console console,LevelPane lp) {
 		this.speed=2000-lp.getLevel()*100;
 		setOnMouseClicked(e-> {
 			try {
-				Media sound = new Media(new File(COOKIECLICKPATH).toURI().toString());
-				MediaPlayer mediaPlayer = new MediaPlayer(sound);
-				mediaPlayer.play();
+				AudioClip sound = new AudioClip(COOKIECLICKPATH);
+				sound.play();
 			} catch (Exception f) {
 	            f.printStackTrace();
 			}
@@ -54,6 +50,7 @@ public class Cookie extends ImageView {
 		});
 		setPath();
 	}
+	
 	public void setPath() {
 		PathTransition pathTransition = new PathTransition();
         pathTransition.setDuration(javafx.util.Duration.millis(this.speed));
@@ -66,21 +63,20 @@ public class Cookie extends ImageView {
             pathTransition.play();
         });
         pathTransition.play();
-}
+	}
 
 	private Path createPath() {
-    int x = ran.nextInt(825-75  + 1)+75; // min=300 , max=600
-    int y = ran.nextInt(675-75  + 1)+75;
-    Path path = new Path();
-    path.getElements().add(new MoveTo(oldx, oldy));
-    this.oldx=x;
-    this.oldy=y;
-    path.getElements().add(new LineTo(x, y));
-    return path;
-}
- public void setSpeed(int s) {
-	this.speed=s;
- }
-
+		int x = ran.nextInt(825-75  + 1)+75; // min=300 , max=600
+		int y = ran.nextInt(675-75  + 1)+75;
+		Path path = new Path();
+		path.getElements().add(new MoveTo(oldx, oldy));
+		this.oldx=x;
+		this.oldy=y;
+		path.getElements().add(new LineTo(x, y));
+		return path;
+	}
+	public void setSpeed(int s) {
+		this.speed=s;
+	}
 }
 

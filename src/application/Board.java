@@ -1,15 +1,9 @@
 package application;
 
-import java.io.File;
 import java.util.Random;
-
-import javafx.animation.PathTransition;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
 import logic.Cookie;
 
 public class Board extends Pane {
@@ -28,13 +22,13 @@ public class Board extends Pane {
 		getChildren().addAll(cookie);
     }
 	
-	public static void loadPath() {
-		bgmPath = "res/Fluffing a Duck.mp3";
+	private static void loadPath() {
+		bgmPath = ClassLoader.getSystemResource("audio/Fluffing a Duck.mp3").toString();;
 	}
     
     // Plays background music
     public void startBgmLoop() {
-		AudioClip bgm = new AudioClip(new File(bgmPath).toURI().toString());
+		AudioClip bgm = new AudioClip(bgmPath);
 		bgm.setCycleCount(AudioClip.INDEFINITE);
 		bgm.play();
     }

@@ -28,6 +28,7 @@ public class Main extends Application {
 	private WelcomePage menu ;
 	private HighScorePage hspage ;
 	private Thread timer ;
+	private static String bgPath;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -50,12 +51,13 @@ public class Main extends Application {
 				console.getAddUpgrade().levelUp();
 				console.addScore(-console.getAddCost());
 				console.setAddCost(console.getAddUpgrade().getLevel()*50);
-				console.getAddlabel().setText("Cookies ("+console.getAddUpgrade().getLevel());
-				console.getAddCostlabel().setText("Cost to add one more cookie: "+console.getAddCost());
+				console.getAddlabel().setText("Cookies (" + console.getAddUpgrade().getLevel());
+				console.getAddCostlabel().setText("Cost to add one more cookie: " + console.getAddCost());
 			}
 		});
 		
-		Image image = new Image("bg.jpeg");
+		bgPath = ClassLoader.getSystemResource("image/bg.jpeg").toString();
+		Image image = new Image(bgPath);
 		// new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage, contain, cover)
 		// new BackgroundImage(image, repeatX, repeatY, position, size)
 		BackgroundSize backgroundSize = new BackgroundSize(1000, 500, true, true, true, false);

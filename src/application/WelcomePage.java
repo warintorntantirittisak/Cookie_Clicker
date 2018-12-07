@@ -3,7 +3,6 @@ package application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -25,6 +24,10 @@ public class WelcomePage extends VBox{
 	private VBox playerName;
 	private Hyperlink highscoresBtn;
 	private Hyperlink exit;
+	private static String startPath;
+	private static String hsPath;
+	private static String exitPath;
+	private static String bgPath;
 	
 	public WelcomePage() {
 		setSpacing(10);
@@ -35,7 +38,9 @@ public class WelcomePage extends VBox{
 		title.setTextFill(Color.WHITE);
 		title.setUnderline(true);
 		
-		start = new Hyperlink("",new ImageView(new Image("start.png")));
+		loadPath();
+		
+		start = new Hyperlink("",new ImageView(new Image(startPath)));
 		start.setBorder(Border.EMPTY);
 		
 		playerName = new VBox();
@@ -50,10 +55,10 @@ public class WelcomePage extends VBox{
 		nameTextfield.setPromptText("Enter your name here.");
 		playerName.getChildren().addAll(nameLabel,nameTextfield);
 		
-		highscoresBtn = new Hyperlink("",new ImageView(new Image("hs.png",150,150,true,true)));
+		highscoresBtn = new Hyperlink("",new ImageView(new Image(hsPath,150,150,true,true)));
 		highscoresBtn.setBorder(Border.EMPTY);
 		
-		exit = new Hyperlink("",new ImageView(new Image("exit.png",150,150,true,true)));
+		exit = new Hyperlink("",new ImageView(new Image(exitPath,150,150,true,true)));
 		exit.setBorder(Border.EMPTY);
 		
 		HBox menubutton = new HBox();
@@ -63,7 +68,7 @@ public class WelcomePage extends VBox{
 	
 		
 		getChildren().addAll(title,menubutton,playerName);
-		Image menuimage = new Image("bg.jpeg");
+		Image menuimage = new Image(bgPath);
 		BackgroundSize backgroundSize = new BackgroundSize(1000, 500, true, true, true, false);
 		BackgroundImage menubackgroundImage = new BackgroundImage(menuimage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
 		Background menubackground = new Background(menubackgroundImage);
@@ -89,6 +94,17 @@ public class WelcomePage extends VBox{
 	}
 	public Hyperlink getExitButton() {
 		return this.exit;
+	}
+	
+	private static void loadPath() {
+		try {
+			startPath = ClassLoader.getSystemResource("image/start.png").toString();
+			hsPath = ClassLoader.getSystemResource("image/hs.png").toString();
+			exitPath = ClassLoader.getSystemResource("image/exit.png").toString();
+			bgPath = ClassLoader.getSystemResource("image/bg.jpeg").toString();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
 	}
 }
 

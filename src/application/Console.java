@@ -1,6 +1,5 @@
 package application;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -42,6 +41,7 @@ public class Console extends VBox {
 	private AutoClickerBuyer autoclickerup;
 	private ClickingUpgrader addcookie;
 	private static String upgradingPath;
+	private static String consolebgPath;
 	
 	public Console() throws IOException {
 		setAlignment(Pos.CENTER);
@@ -51,18 +51,17 @@ public class Console extends VBox {
 		setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, 
 				CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		
-		Image consoleimage = new Image("consolebg.jpg");
+		loadPath();
+		
+		Image consoleimage = new Image(consolebgPath);
 		BackgroundSize backgroundSize = new BackgroundSize(1000, 500, true, true, true, false);
 		BackgroundImage consolebackgroundImage = new BackgroundImage(consoleimage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
 		Background consolebackground = new Background(consolebackgroundImage);
 		setBackground(consolebackground);
 		
-		loadPath();
-		
 		scorelabel = new Label("Score: "+ score);
 		scorelabel.setFont(Font.font(40));
 		scorelabel.setTextFill(Color.WHITE);
-		
 		
 		cookieup = new ClickingUpgrader();
 		autoclickerup = new AutoClickerBuyer();
@@ -90,7 +89,7 @@ public class Console extends VBox {
 		
 		cookieup.setOnAction((e-> {
 			if (score >= clickingcost) {
-				AudioClip sound = new AudioClip(new File(upgradingPath).toURI().toString());
+				AudioClip sound = new AudioClip(upgradingPath);
 				sound.play();
 				addScore(-clickingcost);
 				cookieup.levelUp();
@@ -102,7 +101,7 @@ public class Console extends VBox {
 		
 		autoclickerup.setOnAction((e -> {
 			if (score >= autoclickercost) {
-				AudioClip sound = new AudioClip(new File(upgradingPath).toURI().toString());
+				AudioClip sound = new AudioClip(upgradingPath);
 				sound.play();
 				addScore(-autoclickercost);
 				autoclickerup.getMoreClicker();
@@ -176,7 +175,7 @@ public class Console extends VBox {
 		this.addcost=cost;
 	}
 	public void reset() {
-		score=0;
+		score = 0;
 		cookieup = new ClickingUpgrader();
 		autoclickerup = new AutoClickerBuyer();
 		addcookie= new ClickingUpgrader();
@@ -190,7 +189,8 @@ public class Console extends VBox {
 		addlabel.setText("Cookies ("+addcookie.getLevel()+" cookies)");
 		addcostlabel.setText("Cost to add one more cookie: "+addcost);
 	}
-	public static void loadPath() {
-		upgradingPath = "res/upgrading.mp3";
+	private static void loadPath() {
+		consolebgPath = ClassLoader.getSystemResource("image/consolebg.jpg").toString();
+		upgradingPath = ClassLoader.getSystemResource("audio/upgrading.mp3").toString();
 	}
 }
