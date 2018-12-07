@@ -1,6 +1,6 @@
-Player1
+Test
+64
+Player1 
+40
+Player2 
 20
-Player2
-10
-Player3
-5

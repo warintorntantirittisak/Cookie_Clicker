@@ -68,15 +68,16 @@ public class HighScorePage extends VBox {
 		try {
 			PrintStream outfile = new PrintStream(new File(highscorePath));
 			for (int i = 0; i < highscores.size(); i++) {
-				outfile.println(highscores.get(i).toString());
+				outfile.println(highscores.get(i).getKey());
+				outfile.println(highscores.get(i).getValue());
 			}
 			outfile.close();
 		} catch (FileNotFoundException f) {
 			System.out.println(f.getMessage());
 		}
-		highscorelistlabel.setText("#1: " + highscores.get(0).getKey() + highscores.get(0).getValue()
-				+ "\n#2 :" + highscores.get(1).getKey() + highscores.get(1).getValue() 
-				+ "\n#3 :" + highscores.get(2).getKey() + highscores.get(2).getValue());
+		highscorelistlabel.setText("#1: " + highscores.get(0).getKey() + "     " + highscores.get(0).getValue()
+				+ "\n#2 :" + highscores.get(1).getKey() + "     " + highscores.get(1).getValue() 
+				+ "\n#3 :" + highscores.get(2).getKey() + "     "+ highscores.get(2).getValue());
 	}
 	
 	public Button getMenuBtn() {

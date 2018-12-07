@@ -76,7 +76,7 @@ public class Console extends VBox {
 		clickinglevelcostlabel = new Label("Cost to next level: "+clickingcost);
 		autoclickerlabel = new Label("Auto-Clickers\n("+autoclickerup.getCount()+" clickers)");
 		autoclickercostlabel = new Label("Cost to buy next Auto-Clickers: "+autoclickercost);
-		addlabel = new Label("Number of Cookies\n("+addcookie.getLevel()+" cookies");
+		addlabel = new Label("Number of Cookies\n("+addcookie.getLevel()+" cookies)");
 		addcostlabel = new Label("Cost to add one more cookie: "+addcost);
 		clickinglevellabel.setTextFill(Color.WHITE);
 		clickinglevelcostlabel.setTextFill(Color.WHITE);
@@ -187,7 +187,7 @@ public class Console extends VBox {
 		clickinglevelcostlabel.setText("Cost to next level: "+clickingcost);
 		autoclickerlabel.setText("Auto-Clickers ("+autoclickerup.getCount()+" clickers)");
 		autoclickercostlabel.setText("Cost to buy next Auto-Clickers: "+autoclickercost);
-		addlabel.setText("Cookies ("+addcookie.getLevel()+" cookies on board)");
+		addlabel.setText("Cookies ("+addcookie.getLevel()+" cookies)");
 		addcostlabel.setText("Cost to add one more cookie: "+addcost);
 	}
 	public static void loadPath() {

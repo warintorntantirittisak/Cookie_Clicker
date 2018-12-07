@@ -60,11 +60,12 @@ public class WelcomePage extends VBox{
 	}
 	
 	public String getPlayerName() {
-		String result = "Unnamed Player";
+		String result = "";
 		for (Node node: this.playerName.getChildren()) {
 			if (node instanceof TextField) result = ((TextField) node).getText();
 		}
-		return result;
+		if (result.trim() == "") return "Unnamed Player";
+		else return result.trim();
 	}
 	
 	public Button getHighscoresBtn() {
