@@ -1,6 +1,6 @@
-Test
-64
-Player1 
-40
-Player2 
-20
+J
+48
+Unnamed Player
+38
+A
+30

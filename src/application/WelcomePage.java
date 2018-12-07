@@ -15,6 +15,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Border;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -22,7 +23,8 @@ import javafx.scene.text.Font;
 public class WelcomePage extends VBox{
 	private Hyperlink start;
 	private VBox playerName;
-	private Button highscoresBtn;
+	private Hyperlink highscoresBtn;
+	private Hyperlink exit;
 	
 	public WelcomePage() {
 		setSpacing(10);
@@ -41,17 +43,26 @@ public class WelcomePage extends VBox{
 		playerName.setPadding(new Insets(20,500,20,500));
 		playerName.setSpacing(5);
 		Label nameLabel = new Label("Player's Name: ");
-		nameLabel.setFont(new Font("Ravie", 20));
+		nameLabel.setFont(new Font("Ravie", 15));
 		nameLabel.setTextFill(Color.WHITE);
 		TextField nameTextfield = new TextField();
 		nameTextfield.setPrefWidth(150);
 		nameTextfield.setPromptText("Enter your name here.");
 		playerName.getChildren().addAll(nameLabel,nameTextfield);
 		
-		highscoresBtn = new Button("Highscore Ranking");
+		highscoresBtn = new Hyperlink("",new ImageView(new Image("hs.png",150,150,true,true)));
+		highscoresBtn.setBorder(Border.EMPTY);
 		
-		getChildren().addAll(title,start,playerName,highscoresBtn);
+		exit = new Hyperlink("",new ImageView(new Image("exit.png",150,150,true,true)));
+		exit.setBorder(Border.EMPTY);
+		
+		HBox menubutton = new HBox();
+		menubutton.setAlignment(Pos.CENTER);
+		menubutton.setSpacing(10);
+		menubutton.getChildren().addAll(highscoresBtn,start,exit);
 	
+		
+		getChildren().addAll(title,menubutton,playerName);
 		Image menuimage = new Image("bg.jpeg");
 		BackgroundSize backgroundSize = new BackgroundSize(1000, 500, true, true, true, false);
 		BackgroundImage menubackgroundImage = new BackgroundImage(menuimage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
@@ -63,16 +74,21 @@ public class WelcomePage extends VBox{
 		String result = "";
 		for (Node node: this.playerName.getChildren()) {
 			if (node instanceof TextField) result = ((TextField) node).getText();
+			if (result.equals("")) result="Unnamed Player";
 		}
-		if (result.trim() == "") return "Unnamed Player";
-		else return result.trim();
+		
+		return result.trim();
 	}
 	
-	public Button getHighscoresBtn() {
+	public Hyperlink getHighscoresBtn() {
 		return this.highscoresBtn;
 	}
 	
 	public Hyperlink getStartButton() {
 		return this.start;
 	}
+	public Hyperlink getExitButton() {
+		return this.exit;
+	}
 }
+
