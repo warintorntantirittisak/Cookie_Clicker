@@ -98,7 +98,7 @@ public class HighScorePage extends VBox {
 	private static void loadPath() {
 		try {
 			bgPath = ClassLoader.getSystemResource("image/bg.jpeg").toString();
-			highscorePath = "res/textfile/highscore.txt";
+			highscorePath = ClassLoader.getSystemResource("textfile/highscore.txt").getFile();
 			mainPath = ClassLoader.getSystemResource("image/main.png").toString();
 		} catch (Exception e) {
 			System.out.println(e.toString());

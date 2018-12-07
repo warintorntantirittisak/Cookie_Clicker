@@ -78,7 +78,7 @@ public class Main extends Application {
 		
 		menu.getStartButton().setOnAction(e->{
 			primaryStage.setScene(scene);
-			interval = 10;
+			interval = 100;
 			timeElapsed.setText("Time Left: "+ interval);
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Time Out");
