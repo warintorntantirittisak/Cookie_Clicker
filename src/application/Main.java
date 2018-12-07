@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -19,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 public class Main extends Application {
 	private int interval;
@@ -97,17 +97,20 @@ public class Main extends Application {
 					alert.setContentText("Your Score : " + console.getScore());	
 		            alert.showAndWait();
 		            
-		            if (console.getScore() > hspage.getFirst()) {
+		            if (console.getScore() > hspage.getFirst().getValue()) {
 		            	hspage.setThird(hspage.getSecond());
 		            	hspage.setSecond(hspage.getFirst());
-		            	hspage.setFirst(console.getScore());
+		            	Pair<String,Integer> pair = new Pair<String,Integer>(menu.getPlayerName(),console.getScore());
+		            	hspage.setFirst(pair);
 		            	hspage.refreshHighscores();
-		            } else if (console.getScore() > hspage.getSecond()) {
+		            } else if (console.getScore() > hspage.getSecond().getValue()) {
 		            	hspage.setThird(hspage.getSecond());
-		            	hspage.setSecond(console.getScore());
+		            	Pair<String,Integer> pair = new Pair<String,Integer>(menu.getPlayerName(),console.getScore());
+		            	hspage.setSecond(pair);
 		            	hspage.refreshHighscores();
-		            } else if (console.getScore() > hspage.getThird()) {
-		            	hspage.setThird(console.getScore());
+		            } else if (console.getScore() > hspage.getThird().getValue()) {
+		            	Pair<String,Integer> pair = new Pair<String,Integer>(menu.getPlayerName(),console.getScore());
+		            	hspage.setThird(pair);
 		            	hspage.refreshHighscores();
 		            }
 		            

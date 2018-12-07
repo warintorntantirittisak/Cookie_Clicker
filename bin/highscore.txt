@@ -1,3 +1,6 @@
-669
-512
-103
+Player1
+20
+Player2
+10
+Player3
+5

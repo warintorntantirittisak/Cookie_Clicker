@@ -18,12 +18,13 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.util.Pair;
 
 public class HighScorePage extends VBox {
 	private Label highscoreheaderlabel;
 	private Label highscorelistlabel;
 	private static String highscorePath ="res/highscore.txt";;
-	private ArrayList<Integer> highscores;
+	private ArrayList<Pair<String,Integer>> highscores;
 	private Button menuBtn;
 	
 	public HighScorePage() {
@@ -34,13 +35,15 @@ public class HighScorePage extends VBox {
 		BackgroundImage menubackgroundImage = new BackgroundImage(menuimage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
 		Background menubackground = new Background(menubackgroundImage);
 		setBackground(menubackground);
-		highscores = new ArrayList<Integer>();
+		highscores = new ArrayList<Pair<String,Integer>>(3);
 	
 		try {
 			Scanner infile = new Scanner(new File(highscorePath));
 			while (infile.hasNextLine()) {
-				String line = infile.nextLine();
-				this.highscores.add(Integer.parseInt(line));
+				String name = infile.nextLine();
+				int score = Integer.parseInt(infile.nextLine());
+				Pair<String,Integer> pair = new Pair<String,Integer>(name,score);
+				this.highscores.add(pair);
 			}
 			infile.close();
 		} catch (FileNotFoundException f) {
@@ -51,7 +54,9 @@ public class HighScorePage extends VBox {
 		highscoreheaderlabel.setFont(Font.font(100));
 		highscoreheaderlabel.setTextFill(Color.WHITE);
 	
-		highscorelistlabel = new Label("#1: " + highscores.get(0) + "\n#2 :" + highscores.get(1) + "\n#3 :" + highscores.get(2));
+		highscorelistlabel = new Label("#1: " + highscores.get(0).getKey() + "     " + highscores.get(0).getValue() 
+				+ "\n#2 :" + highscores.get(1).getKey() + "     " + highscores.get(1).getValue() 
+				+ "\n#3 :" + highscores.get(2).getKey() + "     " + highscores.get(2).getValue());
 		highscorelistlabel.setTextFill(Color.WHITE);
 		highscorelistlabel.setFont(Font.font(60));
 		menuBtn = new Button("Main Menu");
@@ -69,37 +74,39 @@ public class HighScorePage extends VBox {
 		} catch (FileNotFoundException f) {
 			System.out.println(f.getMessage());
 		}
-		highscorelistlabel.setText("#1: " + highscores.get(0) + "\n#2 :" + highscores.get(1) + "\n#3 :" + highscores.get(2));
+		highscorelistlabel.setText("#1: " + highscores.get(0).getKey() + highscores.get(0).getValue()
+				+ "\n#2 :" + highscores.get(1).getKey() + highscores.get(1).getValue() 
+				+ "\n#3 :" + highscores.get(2).getKey() + highscores.get(2).getValue());
 	}
 	
 	public Button getMenuBtn() {
 		return this.menuBtn;
 	}
 	
-	public int getThird(){
+	public Pair<String,Integer> getThird(){
 		return this.highscores.get(2);
 	}
 	
-	public void setThird(int score) {
+	public void setThird(Pair<String,Integer> pair) {
 		this.highscores.remove(2);
-		this.highscores.add(2, score);
+		this.highscores.add(2, pair);
 	}
 	
-	public int getSecond() {
+	public Pair<String,Integer> getSecond() {
 		return this.highscores.get(1);
 	}
 	
-	public void setSecond(int score) {
+	public void setSecond(Pair<String,Integer> pair) {
 		this.highscores.remove(1);
-		this.highscores.add(1, score);
+		this.highscores.add(1, pair);
 	}
 	
-	public int getFirst() {
+	public Pair<String,Integer> getFirst() {
 		return this.highscores.get(0);
 	}
 	
-	public void setFirst(int score) {
+	public void setFirst(Pair<String,Integer> pair) {
 		this.highscores.remove(0);
-		this.highscores.add(0, score);
+		this.highscores.add(0, pair);
 	}
 }
