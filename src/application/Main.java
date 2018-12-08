@@ -33,7 +33,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		menu = new WelcomePage();
-		hspage =new HighScorePage();
+		hspage = new HighScorePage();
 		Scene firstscene = new Scene(menu, 1200,700);
 		Scene hsscene = new Scene(hspage, 1200,700);
 		primaryStage.setTitle("Cookie Clicker");

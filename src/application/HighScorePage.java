@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import javafx.geometry.Pos;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -24,11 +23,10 @@ import javafx.util.Pair;
 
 public class HighScorePage extends VBox {
 	private Label highscoreheaderlabel;
-	private Label highscorelabel1;
-	private Label highscorelabel2;	
-	private Label highscorelabel3;	
+	private Label highscorelistlabel;	
 	private ArrayList<Pair<String,Integer>> highscores;
 	private Hyperlink MainMenu;
+	private static ClassLoader classLoader;
 	private static String bgPath;
 	private static String highscorePath;
 	private static String mainPath;
@@ -63,20 +61,18 @@ public class HighScorePage extends VBox {
 		highscoreheaderlabel.setFont(Font.font(100));
 		highscoreheaderlabel.setTextFill(Color.WHITE);
 	
-		highscorelabel1 = new Label("#1: " + highscores.get(0).getKey() + "     " + highscores.get(0).getValue());
-		highscorelabel2 = new Label("#2 :" + highscores.get(1).getKey() + "     " + highscores.get(1).getValue());
-		highscorelabel3 = new Label("#3 :" + highscores.get(2).getKey() + "     " + highscores.get(2).getValue());
-		highscorelabel1.setTextFill(Color.WHITE);
-		highscorelabel1.setFont(Font.font(60));
-		highscorelabel2.setTextFill(Color.WHITE);
-		highscorelabel2.setFont(Font.font(60));
-		highscorelabel3.setTextFill(Color.WHITE);
-		highscorelabel3.setFont(Font.font(60));
+		String hs = "";
+		for (int i = 0; i < 3; i++) {
+			hs += "#" + i + ": " + highscores.get(i).getKey() + "     " + highscores.get(i).getValue() + "\n";
+		}
+		highscorelistlabel = new Label(hs);
+		highscorelistlabel.setTextFill(Color.WHITE);
+		highscorelistlabel.setFont(Font.font(60));
 		
 		MainMenu = new Hyperlink("",new ImageView(new Image(mainPath,150,150,true,true)));
 		MainMenu.setBorder(Border.EMPTY);
 		
-		getChildren().addAll(highscoreheaderlabel,highscorelabel1,highscorelabel2,highscorelabel3,MainMenu);
+		getChildren().addAll(highscoreheaderlabel,highscorelistlabel,MainMenu);
 	}
 	
 	public void refreshHighscores() {
@@ -90,15 +86,17 @@ public class HighScorePage extends VBox {
 		} catch (FileNotFoundException f) {
 			System.out.println(f.getMessage());
 		}
-		highscorelabel1.setText("#1: " + highscores.get(0).getKey() + "     " + highscores.get(0).getValue());
-		highscorelabel2.setText("#2 :" + highscores.get(1).getKey() + "     " + highscores.get(1).getValue());
-		highscorelabel3.setText("#3 :" + highscores.get(2).getKey() + "     " + highscores.get(2).getValue());
+		String hs = "";
+		for (int i = 0; i < 3; i++) {
+			hs += "#" + i + ": " + highscores.get(i).getKey() + "     " + highscores.get(i).getValue() + "\n";
+		}
+		highscorelistlabel.setText(hs);
 	}
 	
 	private static void loadPath() {
 		try {
 			bgPath = ClassLoader.getSystemResource("image/bg.jpeg").toString();
-			highscorePath = ClassLoader.getSystemResource("textfile/highscore.txt").getFile();
+			highscorePath = ClassLoader.getSystemResource("data/highscore.txt").getFile();
 			mainPath = ClassLoader.getSystemResource("image/main.png").toString();
 		} catch (Exception e) {
 			System.out.println(e.toString());
