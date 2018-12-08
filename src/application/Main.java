@@ -33,7 +33,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		menu = new WelcomePage();
-		hspage =new HighScorePage();
+		hspage = new HighScorePage();
 		Scene firstscene = new Scene(menu, 1200,700);
 		Scene hsscene = new Scene(hspage, 1200,700);
 		primaryStage.setTitle("Cookie Clicker");
@@ -142,6 +142,9 @@ public class Main extends Application {
         });
 		primaryStage.show();
 		primaryStage.setResizable(false);
+		primaryStage.setOnCloseRequest(x->{ 
+		Platform.exit();
+        System.exit(0);});
 	}
 	
 	public static void main(String [] args) {
