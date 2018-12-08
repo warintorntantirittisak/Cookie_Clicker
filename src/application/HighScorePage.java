@@ -1,7 +1,11 @@
 package application;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -30,7 +34,7 @@ public class HighScorePage extends VBox {
 	private ArrayList<Pair<String,Integer>> highscores;
 	private Hyperlink MainMenu;
 	private static String bgPath;
-	private static String highscorePath;
+	private static InputStream highscorePath;
 	private static String mainPath;
 	
 	public HighScorePage() {
@@ -45,19 +49,24 @@ public class HighScorePage extends VBox {
 		Background menubackground = new Background(menubackgroundImage);
 		setBackground(menubackground);
 		highscores = new ArrayList<Pair<String,Integer>>(3);
-	
+		BufferedReader reader = new BufferedReader(new InputStreamReader(highscorePath));
 		try {
-			Scanner infile = new Scanner(new File(highscorePath));
-			while (infile.hasNextLine()) {
-				String name = infile.nextLine();
-				int score = Integer.parseInt(infile.nextLine());
-				Pair<String,Integer> pair = new Pair<String,Integer>(name,score);
-				this.highscores.add(pair);
+			for (int i =0;i<3;i++) {
+				String name;
+				
+					name = reader.readLine();
+					System.out.println(name);
+					int score = Integer.parseInt(reader.readLine());
+					Pair<String,Integer> pair = new Pair<String,Integer>(name,score);
+					this.highscores.add(pair);
 			}
-			infile.close();
-		} catch (FileNotFoundException f) {
-			System.out.println(f.getMessage());
-		}
+			highscorePath.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					System.out.println("ERROR");
+					e.printStackTrace();
+				}
+			
 	
 		highscoreheaderlabel = new Label("Highscore Ranking");
 		highscoreheaderlabel.setFont(Font.font(100));
@@ -81,7 +90,7 @@ public class HighScorePage extends VBox {
 	
 	public void refreshHighscores() {
 		try {
-			PrintStream outfile = new PrintStream(new File(highscorePath));
+			PrintStream outfile = new PrintStream(new File("res/textfield/highscore.txt"));
 			for (int i = 0; i < highscores.size(); i++) {
 				outfile.println(highscores.get(i).getKey());
 				outfile.println(highscores.get(i).getValue());
@@ -98,7 +107,7 @@ public class HighScorePage extends VBox {
 	private static void loadPath() {
 		try {
 			bgPath = ClassLoader.getSystemResource("image/bg.jpeg").toString();
-			highscorePath = ClassLoader.getSystemResource("textfile/highscore.txt").getFile();
+			highscorePath = HighScorePage.class.getClassLoader().getResourceAsStream("textfile/highscore.txt");
 			mainPath = ClassLoader.getSystemResource("image/main.png").toString();
 		} catch (Exception e) {
 			System.out.println(e.toString());
