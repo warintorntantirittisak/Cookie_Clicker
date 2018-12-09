@@ -71,11 +71,11 @@ public class Console extends VBox {
 		autoclickercost = autoclickerup.getCost();
 		addcost = addcookie.getUpgradeCost();
 		
-		clickinglevellabel = new Label("Clicking Proficiency\n(Level "+cookieup.getLevel()+")");
+		clickinglevellabel = new Label("Clicking Proficiency (Level "+cookieup.getLevel()+")");
 		clickinglevelcostlabel = new Label("Cost to next level: "+clickingcost);
-		autoclickerlabel = new Label("Auto-Clickers\n("+autoclickerup.getCount()+" clickers)");
+		autoclickerlabel = new Label("Auto-Clickers ("+autoclickerup.getCount()+" clickers)");
 		autoclickercostlabel = new Label("Cost to buy next Auto-Clickers: "+autoclickercost);
-		addlabel = new Label("Number of Cookies\n("+addcookie.getLevel()+" cookies)");
+		addlabel = new Label("Number of Cookies ("+addcookie.getLevel()+" cookies)");
 		addcostlabel = new Label("Cost to add one more cookie: "+addcost);
 		clickinglevellabel.setTextFill(Color.WHITE);
 		clickinglevelcostlabel.setTextFill(Color.WHITE);
@@ -111,6 +111,7 @@ public class Console extends VBox {
 				autoclickercostlabel.setText("Cost to buy next Auto-Clickers: "+autoclickercost);
 			}
 		}));
+		
 		
 		Timer produce = new Timer();
 		produce.scheduleAtFixedRate(new TimerTask() {

@@ -66,7 +66,7 @@ public class Cookie extends ImageView {
 	}
 
 	private Path createPath() {
-		int x = ran.nextInt(825-75  + 1)+75; // min=300 , max=600
+		int x = ran.nextInt(800-75  + 1)+75; // min=300 , max=600
 		int y = ran.nextInt(675-75  + 1)+75;
 		Path path = new Path();
 		path.getElements().add(new MoveTo(oldx, oldy));

@@ -14,7 +14,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 
 import javafx.scene.layout.HBox;
-
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -29,6 +29,7 @@ public class Main extends Application {
 	private HighScorePage hspage ;
 	private Thread timer ;
 	private static String bgPath;
+	private static String bgmPath;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -45,13 +46,14 @@ public class Main extends Application {
 		board = new Board();
 		levelpane= new LevelPane();
 		board.addCookie(console,levelpane);
+		
 		console.getAddUpgrade().setOnAction(e-> {
 			if(console.getScore()>=console.getAddCost()) {
 				board.addCookie(console,levelpane);
 				console.getAddUpgrade().levelUp();
 				console.addScore(-console.getAddCost());
 				console.setAddCost(console.getAddUpgrade().getLevel()*50);
-				console.getAddlabel().setText("Cookies (" + console.getAddUpgrade().getLevel());
+				console.getAddlabel().setText("Number of Cookies (" + console.getAddUpgrade().getLevel()+" cookies)");
 				console.getAddCostlabel().setText("Cost to add one more cookie: " + console.getAddCost());
 			}
 		});
@@ -73,7 +75,7 @@ public class Main extends Application {
 		timeElapsed.setFont(Font.font(30));
 		
 		console.getChildren().add(timeElapsed);
-		board.startBgmLoop();
+		startBgmLoop();
 		Scene scene = new Scene(root, 1200,700);
 		
 		menu.getStartButton().setOnAction(e->{
@@ -97,21 +99,22 @@ public class Main extends Application {
 				Platform.runLater(() -> {
 					if(interval<=0) {
 					timeElapsed.setTextFill(Color.WHITE);
-					alert.setContentText("Your Score : " + console.getScore());	
+					int finalscore = console.getScore();
+					alert.setContentText("Your Score : " + finalscore);	
 		            alert.showAndWait();
-		            if (console.getScore() > hspage.getFirst().getValue()) {
+		            if (finalscore > hspage.getFirst().getValue()) {
 		            	hspage.setThird(hspage.getSecond());
 		            	hspage.setSecond(hspage.getFirst());
-		            	Pair<String,Integer> pair = new Pair<String,Integer>(menu.getPlayerName(),console.getScore());
+		            	Pair<String,Integer> pair = new Pair<String,Integer>(menu.getPlayerName(),finalscore);
 		            	hspage.setFirst(pair);
 		            	hspage.refreshHighscores();
-		            } else if (console.getScore() > hspage.getSecond().getValue()) {
+		            } else if (finalscore > hspage.getSecond().getValue()) {
 		            	hspage.setThird(hspage.getSecond());
-		            	Pair<String,Integer> pair = new Pair<String,Integer>(menu.getPlayerName(),console.getScore());
+		            	Pair<String,Integer> pair = new Pair<String,Integer>(menu.getPlayerName(),finalscore);
 		            	hspage.setSecond(pair);
 		            	hspage.refreshHighscores();
-		            } else if (console.getScore() > hspage.getThird().getValue()) {
-		            	Pair<String,Integer> pair = new Pair<String,Integer>(menu.getPlayerName(),console.getScore());
+		            } else if (finalscore > hspage.getThird().getValue()) {
+		            	Pair<String,Integer> pair = new Pair<String,Integer>(menu.getPlayerName(),finalscore);
 		            	hspage.setThird(pair);
 		            	hspage.refreshHighscores();
 		            }
@@ -147,6 +150,18 @@ public class Main extends Application {
         System.exit(0);});
 	}
 	
+	private static void loadPath() {
+		bgmPath = ClassLoader.getSystemResource("audio/Fluffing a Duck.mp3").toString();;
+	}
+    
+    // Plays background music
+    public static void startBgmLoop() {
+    	loadPath();
+		AudioClip bgm = new AudioClip(bgmPath);
+		bgm.setCycleCount(AudioClip.INDEFINITE);
+		bgm.play();
+    }
+    
 	public static void main(String [] args) {
 		launch(args);
 	}

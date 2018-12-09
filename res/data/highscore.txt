@@ -1,6 +1,6 @@
+ABC
+50
+CP
+20
 J
-48
-Unnamed Player
-38
-A
-30
+10
