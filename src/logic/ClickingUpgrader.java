@@ -29,6 +29,7 @@ public class ClickingUpgrader extends Button {
 	public void setLevel(int level) {this.level = level;}
 	
 	public void levelUp() {
+		if (this.level == 10) return;
 		this.setLevel(this.level+1);
 		this.setUpgradeCost(this.level);
 	}
