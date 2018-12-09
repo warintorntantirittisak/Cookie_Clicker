@@ -27,6 +27,7 @@ public class AutoClickerBuyer extends Button {
 	public int getCount() {return this.count;}
 	
 	public void getMoreClicker() {
+		if (this.count == 10) return;
 		this.count = this.count + 1;
 	}
 	

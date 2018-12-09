@@ -1,6 +1,6 @@
-J
+Player1
 48
-Unnamed Player
+Player2
 38
-A
+Player3
 30
