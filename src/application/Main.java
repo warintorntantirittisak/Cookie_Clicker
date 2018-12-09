@@ -55,6 +55,7 @@ public class Main extends Application {
 				console.setAddCost(console.getAddUpgrade().getLevel()*50);
 				console.getAddlabel().setText("Number of Cookies (" + console.getAddUpgrade().getLevel()+" cookies)");
 				console.getAddCostlabel().setText("Cost to add one more cookie: " + console.getAddCost());
+				console.updateButton();
 			}
 		});
 		
@@ -88,6 +89,7 @@ public class Main extends Application {
 			timer = new Thread(() -> {
 				while (interval > 0) {
 					try {
+						console.updateButton();
 						Thread.sleep(1000);
 						Platform.runLater(()->timeElapsed.setText("Time Left: "+ interval));
 						interval--;

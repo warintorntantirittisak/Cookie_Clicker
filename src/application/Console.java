@@ -96,6 +96,7 @@ public class Console extends VBox {
 				clickingcost = cookieup.getUpgradeCost();
 				clickinglevellabel.setText("Clicking Proficiency (Level "+cookieup.getLevel()+")");
 				clickinglevelcostlabel.setText("Cost to next level: "+clickingcost);
+				updateButton();
 			}
 		}));
 		
@@ -109,6 +110,7 @@ public class Console extends VBox {
 				autoclickercost = autoclickerup.getCost();
 				autoclickerlabel.setText("Auto-Clickers ("+autoclickerup.getCount()+" clickers)");
 				autoclickercostlabel.setText("Cost to buy next Auto-Clickers: "+autoclickercost);
+				updateButton();
 			}
 		}));
 		
@@ -193,5 +195,23 @@ public class Console extends VBox {
 	private static void loadPath() {
 		consolebgPath = ClassLoader.getSystemResource("image/consolebg.jpg").toString();
 		upgradingPath = ClassLoader.getSystemResource("audio/upgrading.mp3").toString();
+	}
+	public void updateButton() {
+		if(score<clickingcost) {
+			cookieup.setDisable(true);
+		}else {
+			cookieup.setDisable(false);
+		}
+		if(score<autoclickercost) {
+			autoclickerup.setDisable(true);
+		}else {
+			autoclickerup.setDisable(false);
+		}
+		if(score<addcost) {
+			addcookie.setDisable(true);
+		}else {
+			addcookie.setDisable(false);
+		}
+		
 	}
 }

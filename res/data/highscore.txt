@@ -1,15 +1,6 @@
-<<<<<<< HEAD
 ABC
 50
 CP
 20
 J
 10
-=======
-Player1
-48
-Player2
-38
-Player3
-30
->>>>>>> fabf44b3a6ebc29ba712e5145920eeb4c551fd5b
