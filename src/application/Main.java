@@ -47,17 +47,6 @@ public class Main extends Application {
 		levelpane= new LevelPane();
 		board.addCookie(console,levelpane);
 		
-		console.getAddUpgrade().setOnAction(e-> {
-			if(console.getScore()>=console.getAddCost()) {
-				board.addCookie(console,levelpane);
-				console.getAddUpgrade().levelUp();
-				console.addScore(-console.getAddCost());
-				console.setAddCost(console.getAddUpgrade().getLevel()*50);
-				console.getAddlabel().setText("Number of Cookies (" + console.getAddUpgrade().getLevel()+" cookies)");
-				console.getAddCostlabel().setText("Cost to add one more cookie: " + console.getAddCost());
-				console.updateButton();
-			}
-		});
 		
 		bgPath = ClassLoader.getSystemResource("image/bg.jpeg").toString();
 		Image image = new Image(bgPath);
@@ -75,11 +64,13 @@ public class Main extends Application {
 		timeElapsed.setTextFill(Color.WHITE);
 		timeElapsed.setFont(Font.font(30));
 		
-		console.getChildren().add(timeElapsed);
 		startBgmLoop();
 		Scene scene = new Scene(root, 1200,700);
 		
 		menu.getStartButton().setOnAction(e->{
+			console.setAddUpgradeOnAction(board, levelpane);
+			console.getChildren().add(timeElapsed);
+			timeElapsed.setTextFill(Color.WHITE);
 			primaryStage.setScene(scene);
 			interval = 100;
 			timeElapsed.setText("Time Left: "+ interval);

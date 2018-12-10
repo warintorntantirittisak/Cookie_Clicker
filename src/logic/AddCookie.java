@@ -2,21 +2,19 @@ package logic;
 
 import javafx.scene.control.Button;
 
-// This class increases the number of score that you gets when clicking the cookie. Max level of clicking is 10.
-public class ClickingUpgrader extends Button implements Upgradeable {
-	
+public class AddCookie extends Button implements Upgradeable{
 	private int level;
 	private int upgradeCost;
 	
-	public ClickingUpgrader() {
-		super("Upgrade");
+	public AddCookie() {
+		super("Add");
 		this.level = 1;
 		setUpgradeCost(this.level);
 		setDisable(true);
 	}
 	
 	public void setUpgradeCost(int level) {
-		int cost = 20;
+		int cost = 40;
 		if (level > 10) level = 1;
 		for (int i = 2; i <= level; ++i) {
 			int x = (level+1)*5;
@@ -34,5 +32,4 @@ public class ClickingUpgrader extends Button implements Upgradeable {
 		this.setLevel(this.level+1);
 		this.setUpgradeCost(this.level);
 	}
-
 }

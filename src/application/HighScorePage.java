@@ -3,9 +3,11 @@ package application;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -90,7 +92,7 @@ public class HighScorePage extends VBox {
  
  public void refreshHighscores() {
   try {
-   PrintStream outfile = new PrintStream(new File("res/data/highscore.txt"));
+   PrintStream outfile = new PrintStream(new FileOutputStream("res/data/highscore.txt"));
    for (int i = 0; i < highscores.size(); i++) {
     outfile.println(highscores.get(i).getKey());
     outfile.println(highscores.get(i).getValue());

@@ -2,5 +2,5 @@ ABC
 50
 CP
 20
-J
-10
+Unnamed Player
+15

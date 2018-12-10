@@ -3,7 +3,7 @@ package application;
 import java.util.Random;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.AudioClip;
+
 import logic.Cookie;
 
 public class Board extends Pane {

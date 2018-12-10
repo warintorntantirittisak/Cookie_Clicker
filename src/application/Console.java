@@ -22,6 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import logic.AddCookie;
 import logic.AutoClickerBuyer;
 import logic.ClickingUpgrader;
 
@@ -39,7 +40,7 @@ public class Console extends VBox {
 	private int addcost;
 	private ClickingUpgrader cookieup;
 	private AutoClickerBuyer autoclickerup;
-	private ClickingUpgrader addcookie;
+	private AddCookie addcookie;
 	private static String upgradingPath;
 	private static String consolebgPath;
 	
@@ -65,10 +66,10 @@ public class Console extends VBox {
 		
 		cookieup = new ClickingUpgrader();
 		autoclickerup = new AutoClickerBuyer();
-		addcookie= new ClickingUpgrader();
+		addcookie= new AddCookie();
 		
 		clickingcost = cookieup.getUpgradeCost();
-		autoclickercost = autoclickerup.getCost();
+		autoclickercost = autoclickerup.getUpgradeCost();
 		addcost = addcookie.getUpgradeCost();
 		
 		clickinglevellabel = new Label("Clicking Proficiency (Level "+cookieup.getLevel()+")");
@@ -87,33 +88,7 @@ public class Console extends VBox {
 		autoclickerlabel.setFont(Font.font(15));
 		addlabel.setFont(Font.font(15));
 		
-		cookieup.setOnAction((e-> {
-			if (score >= clickingcost) {
-				AudioClip sound = new AudioClip(upgradingPath);
-				sound.play();
-				addScore(-clickingcost);
-				cookieup.levelUp();
-				clickingcost = cookieup.getUpgradeCost();
-				clickinglevellabel.setText("Clicking Proficiency (Level "+cookieup.getLevel()+")");
-				clickinglevelcostlabel.setText("Cost to next level: "+clickingcost);
-				updateButton();
-			}
-		}));
-		
-		autoclickerup.setOnAction((e -> {
-			if (score >= autoclickercost) {
-				AudioClip sound = new AudioClip(upgradingPath);
-				sound.play();
-				addScore(-autoclickercost);
-				autoclickerup.getMoreClicker();
-				autoclickerup.setCost(autoclickerup.getCount());
-				autoclickercost = autoclickerup.getCost();
-				autoclickerlabel.setText("Auto-Clickers ("+autoclickerup.getCount()+" clickers)");
-				autoclickercostlabel.setText("Cost to buy next Auto-Clickers: "+autoclickercost);
-				updateButton();
-			}
-		}));
-		
+		setUpgradeOnAction();
 		
 		Timer produce = new Timer();
 		produce.scheduleAtFixedRate(new TimerTask() {
@@ -168,7 +143,7 @@ public class Console extends VBox {
 	public AutoClickerBuyer getAutoClickerBuy() {
 		return this.autoclickerup;
 	}
-	public ClickingUpgrader getAddUpgrade() {
+	public AddCookie getAddUpgrade() {
 		return this.addcookie;
 	}
 	public void setCost(int cost) {
@@ -178,12 +153,13 @@ public class Console extends VBox {
 		this.addcost=cost;
 	}
 	public void reset() {
+		getChildren().clear();
 		score = 0;
 		cookieup = new ClickingUpgrader();
 		autoclickerup = new AutoClickerBuyer();
-		addcookie= new ClickingUpgrader();
+		addcookie= new AddCookie();
 		clickingcost = cookieup.getUpgradeCost();
-		autoclickercost = autoclickerup.getCost();
+		autoclickercost = autoclickerup.getUpgradeCost();
 		addcost = addcookie.getUpgradeCost();
 		clickinglevellabel.setText("Clicking Proficiency (Level "+cookieup.getLevel()+")");
 		clickinglevelcostlabel.setText("Cost to next level: "+clickingcost);
@@ -191,6 +167,8 @@ public class Console extends VBox {
 		autoclickercostlabel.setText("Cost to buy next Auto-Clickers: "+autoclickercost);
 		addlabel.setText("Cookies ("+addcookie.getLevel()+" cookies)");
 		addcostlabel.setText("Cost to add one more cookie: "+addcost);
+		setUpgradeOnAction();
+		getChildren().addAll(scorelabel,clickinglevellabel,clickinglevelcostlabel,cookieup,autoclickerlabel,autoclickercostlabel,autoclickerup,addlabel,addcostlabel,addcookie);
 	}
 	private static void loadPath() {
 		consolebgPath = ClassLoader.getSystemResource("image/consolebg.jpg").toString();
@@ -214,4 +192,47 @@ public class Console extends VBox {
 		}
 		
 	}
-}
+	public void setUpgradeOnAction() {
+
+		cookieup.setOnAction((e-> {
+			if (score >= clickingcost) {
+				AudioClip sound = new AudioClip(upgradingPath);
+				sound.play();
+				addScore(-clickingcost);
+				cookieup.levelUp();
+				clickingcost = cookieup.getUpgradeCost();
+				clickinglevellabel.setText("Clicking Proficiency (Level "+cookieup.getLevel()+")");
+				clickinglevelcostlabel.setText("Cost to next level: "+clickingcost);
+				updateButton();
+			}
+		}));
+		
+		autoclickerup.setOnAction((e -> {
+			if (score >= autoclickercost) {
+				AudioClip sound = new AudioClip(upgradingPath);
+				sound.play();
+				addScore(-autoclickercost);
+				autoclickerup.levelUp();
+				autoclickerup.setUpgradeCost(autoclickerup.getCount());
+				autoclickercost = autoclickerup.getUpgradeCost();
+				autoclickerlabel.setText("Auto-Clickers ("+autoclickerup.getCount()+" clickers)");
+				autoclickercostlabel.setText("Cost to buy next Auto-Clickers: "+autoclickercost);
+				updateButton();
+			}
+		}));
+	}
+	public void setAddUpgradeOnAction(Board board,LevelPane levelpane) {
+		getAddUpgrade().setOnAction(e-> {
+			if(getScore()>=getAddCost()) {
+				board.addCookie(this,levelpane);
+				getAddUpgrade().levelUp();
+				addScore(-getAddCost());
+				setAddCost(getAddUpgrade().getLevel()*50);
+				getAddlabel().setText("Number of Cookies (" + getAddUpgrade().getLevel()+" cookies)");
+				getAddCostlabel().setText("Cost to add one more cookie: " + getAddCost());
+				updateButton( );
+			}
+		});
+	}
+	}
+
