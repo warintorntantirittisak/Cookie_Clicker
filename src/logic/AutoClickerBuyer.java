@@ -15,7 +15,7 @@ public class AutoClickerBuyer extends Button implements Upgradeable {
 		setDisable(true);
 		
 	}
-	
+	 
 	public void setUpgradeCost(int count) {
 		int cost = 30;
 		if (count > 10) count = 1;

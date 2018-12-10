@@ -110,6 +110,9 @@ public class Console extends VBox {
 	public int getScore() {
 		return this.score;
 	}
+	public Label getScoreLabel() {
+		return this.scorelabel;
+	}
 	public int getClickingCost() {
 		return this.clickingcost;
 	}

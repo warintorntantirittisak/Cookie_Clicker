@@ -1,6 +1,6 @@
+Player
+547
 ABC
 50
-CP
-20
-Unnamed Player
-15
+Test
+30

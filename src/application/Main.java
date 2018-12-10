@@ -46,7 +46,8 @@ public class Main extends Application {
 		board = new Board();
 		levelpane= new LevelPane();
 		board.addCookie(console,levelpane);
-		
+		board.addBomb(console,levelpane);
+		board.addBomb(console,levelpane);
 		
 		bgPath = ClassLoader.getSystemResource("image/bg.jpeg").toString();
 		Image image = new Image(bgPath);
@@ -117,6 +118,8 @@ public class Main extends Application {
 		            levelpane.reset();
 					board.reset();
 					board.addCookie(console,levelpane);
+					board.addBomb(console,levelpane);
+					board.addBomb(console,levelpane);
 					}
 				   });
 			});
@@ -131,6 +134,8 @@ public class Main extends Application {
             levelpane.reset();
 			board.reset();
 			board.addCookie(console,levelpane);
+			board.addBomb(console,levelpane);
+			board.addBomb(console,levelpane);
 			});
 		menu.getExitButton().setOnAction(x->{ 
 		Platform.exit();
